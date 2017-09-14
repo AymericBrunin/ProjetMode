@@ -46,7 +46,7 @@ public class InterfaceTest extends Application{
 		
 		//Programmation évenementielle
 		Clear.setOnMouseClicked(e->{gc.clearRect(0, 0, 200, 200);commande.clear();});
-		
+		Quit.setOnMouseClicked(e->{stage.close();});
 		//Configuration du canvas
 		canvas.setWidth(200);
 		canvas.setHeight(200);	
