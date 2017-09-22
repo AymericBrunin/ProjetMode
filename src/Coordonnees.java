@@ -7,6 +7,7 @@ public class Coordonnees {
 		this.x = x;
 		this.y = y;
 	}
+	public Coordonnees() {}
 
 	public int getX() {
 		return x;
