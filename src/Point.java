@@ -21,15 +21,20 @@ public class Point extends Coordonnees{
 	public void setAngle(int angle) {
 		this.angle = angle;
 	}
+	
+	/*
+	 * Calcul de la nouvelle position d'un point après déplacement(distance et angle)
+	 * 
+	 */
 	public Point createNewPoint(int distance, int angle) {
 		Point nouveauPoint = new Point();
 		nouveauPoint.setX((int)(this.getX()+distance*Math.cos(angle)));
 		nouveauPoint.setY((int)(this.getY()+distance*Math.sin(angle)));
-		if(nouveauPoint.getX() > 200) {
-			nouveauPoint.setX(200);
+		if(nouveauPoint.getX() > InterfaceTest.TAILLECANVAS) {
+			nouveauPoint.setX(InterfaceTest.TAILLECANVAS);
 		}
-		if(nouveauPoint.getY() > 200) {
-			nouveauPoint.setY(200);
+		if(nouveauPoint.getY() > InterfaceTest.TAILLECANVAS) {
+			nouveauPoint.setY(InterfaceTest.TAILLECANVAS);
 		}
 		return nouveauPoint;
 	}

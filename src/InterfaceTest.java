@@ -11,10 +11,14 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class InterfaceTest extends Application{
+	
+	static final int TAILLECANVAS = 200;
+	
 	Canvas canvas = new Canvas();
 	TextArea commande = new TextArea();
 	GraphicsContext gc = canvas.getGraphicsContext2D();
 
+	private Point pointTete = new Point(0,0,0);
 
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -44,13 +48,16 @@ public class InterfaceTest extends Application{
 		commande.setMaxSize(210, 180);
 		interaction.getChildren().addAll(Bouton,commande,Menu);
 		
-		//Programmation évenementielle
-		Clear.setOnMouseClicked(e->{gc.clearRect(0, 0, 200, 200);commande.clear();});
+		//Programmation Evenementielle
+		
+		Clear.setOnMouseClicked(e->{gc.clearRect(0, 0, TAILLECANVAS, TAILLECANVAS);commande.clear();});
 		Quit.setOnMouseClicked(e->{stage.close();});
 		//Configuration du canvas
-		canvas.setWidth(200);
-		canvas.setHeight(200);	
+		canvas.setWidth(TAILLECANVAS);
+		canvas.setHeight(TAILLECANVAS);	
 		fenetre.getChildren().addAll(canvas,interaction);
+		//Test du dessin sur canvas. A midifier en methode != de lambda expression. Antoine
+		canvas.setOnMouseClicked(e->{gc.strokeLine(pointTete.getX(), pointTete.getY(), 50, 50);});
 		
 		Scene scene = new Scene(fenetre);
 		stage.setScene(scene);
