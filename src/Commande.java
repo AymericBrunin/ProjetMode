@@ -13,30 +13,32 @@ public class Commande {
 	private GraphicsContext gc;
 	private Point tete;
 	private List<LigneC> liste;
+	private boolean positionLever = false;
 	
 	public Commande(GraphicsContext g, Point tete,ArrayList<LigneC> l){
 		gc = g;
 		this.tete = tete;
 		liste = l;
 	}
+	public void actionAvant(int i) {
+		Point p = new Point();
+		p = tete.createNewPoint(Integer.parseInt(liste.get(i).val), angle);
+		gc.strokeLine(tete.getX(), tete.getY(), p.getX(), p.getY() );
+	}
 	
-	public GraphicsContext drawLines(){
+	public void drawLines(){
 	
 		for(int i=0;i<liste.size();i++){
 			
 			if(Action.estAvant(liste.get(i).action)){
-				Point p = new Point();
-				p = tete.createNewPoint(Integer.parseInt(liste.get(i).val), angle);
-				gc.strokeLine(tete.getX(), tete.getY(), p.getX(), p.getY() );
+				actionAvant(i);
 			}
 			else if(Action.estDroite(liste.get(i).action)){
-				 angle += Integer.parseInt(liste.get(i).val);
-				 //rajouter des tests pour les angles
+				 angle = calculAngleDroite(Integer.parseInt(liste.get(i).val), angle);
 			 }
 			 
 			else if(Action.estGauche(liste.get(i).action)){
-				 angle -= Integer.parseInt(liste.get(i).val);
-				 //rajouter des tests pour les angles
+				 angle = calculAngleGauche(Integer.parseInt(liste.get(i).val), angle);
 			 }
 			 
 			else if(Action.estEpaisseur(liste.get(i).action)){
@@ -81,24 +83,51 @@ public class Commande {
 					 color = Color.BROWN;
 				 }
 				 gc.setFill(color);
+				 if(positionLever) { //Si le point est leve et que l'utilisateur change de couleur, rien ne se passe.
+					 gc.setFill(Color.WHITE);
+				 }
 			 }
 			else if(liste.get(i).action.equals("LEVER")){
 				 colorSave = color;
 				 color = Color.WHITE;
+				 positionLever = true;
 			 }
 			else if(liste.get(i).action.equals("POSER")){
 				 color = colorSave;
+				 positionLever = false;
 			 }
-			
-			 
-			 
-			 
-			 
 		}
-		
-	
 	}
-
+	
+	public int calculAngleDroite(int valeur, int angleTmp) {
+		int stockage=0;
+		while(valeur >=360){
+			valeur -= 360;
+		}
+		if(angleTmp+valeur >= 360) {
+			stockage = (angleTmp + valeur) - 360;
+			angleTmp = stockage;
+		}
+		else {
+			angleTmp += valeur;
+		}
+		return angleTmp;
+	}
+	
+	public int calculAngleGauche(int valeur, int angleTmp) {
+		int stockage = 0;
+		while(valeur >= 360) {
+			valeur -=360;
+		}
+		if(angleTmp-valeur < 0) {//-20
+			stockage = angleTmp - valeur;
+			angleTmp = 360 + stockage;
+		}
+		else {
+			angleTmp -= valeur;
+		}
+		return angleTmp;
+	}
 
 	public Color getColor() {
 		return color;
