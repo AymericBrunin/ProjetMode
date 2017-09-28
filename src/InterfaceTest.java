@@ -56,26 +56,25 @@ public class InterfaceTest extends Application{
 		//streamtokenizer
 
 		Submit.setOnMouseClicked(e->{
-			
-			try{
-					st=new StreamTokenizer(new StringReader(commande.getText()));
-					int token=st.nextToken();
 
-					while(token!=StreamTokenizer.TT_EOF){
-						System.out.println(st.sval);
-						if(st.sval.equals(" "));{
-							token=st.nextToken();
+			try{
+				st=new StreamTokenizer(new StringReader(commande.getText()));
+
+				int type;
+				while ((type = st.nextToken()) != StreamTokenizer.TT_EOF) {
+					switch (type) {
+					case StreamTokenizer.TT_NUMBER:
 						System.out.println(st.nval);
-						
-						}if(st.sval.equals('\n')){
-							System.out.println(st.sval);
-					}token=st.nextToken();
-						
+						break;
+					case StreamTokenizer.TT_WORD:
+						System.out.println(st.sval);
+						break;
 					}
 				}
-		
+			}
+
 			catch (Exception E){
-				
+
 			}
 		});
 
