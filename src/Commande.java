@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -8,11 +11,12 @@ public class Commande {
 	private int angle;
 	private GraphicsContext gc;
 	private Point tete;
+	private List<LigneC> liste;
 	
-	
-	public Commande(GraphicsContext g, Point tete){
+	public Commande(GraphicsContext g, Point tete,ArrayList<LigneC> l){
 		gc = g;
-		this.tete = tete;	
+		this.tete = tete;
+		liste = l;
 	}
 
 
