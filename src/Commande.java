@@ -5,10 +5,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class Commande {
-	private Color color;
+	private Color color = Color.BLACK;
+	private Color colorSave = Color.BLACK;
 	private Action action;
-	private int distance;
-	private int angle;
+	private int distance=0;
+	private int angle=0;
 	private GraphicsContext gc;
 	private Point tete;
 	private List<LigneC> liste;
@@ -17,6 +18,85 @@ public class Commande {
 		gc = g;
 		this.tete = tete;
 		liste = l;
+	}
+	
+	public GraphicsContext drawLines(){
+	
+		for(int i=0;i<liste.size();i++){
+			
+			if(Action.estAvant(liste.get(i).action)){
+				Point p = new Point();
+				p = tete.createNewPoint(Integer.parseInt(liste.get(i).val), angle);
+				gc.strokeLine(tete.getX(), tete.getY(), p.getX(), p.getY() );
+			}
+			else if(Action.estDroite(liste.get(i).action)){
+				 angle += Integer.parseInt(liste.get(i).val);
+				 //rajouter des tests pour les angles
+			 }
+			 
+			else if(Action.estGauche(liste.get(i).action)){
+				 angle -= Integer.parseInt(liste.get(i).val);
+				 //rajouter des tests pour les angles
+			 }
+			 
+			else if(Action.estEpaisseur(liste.get(i).action)){
+				 gc.setLineWidth(Integer.parseInt(liste.get(i).val));
+				 
+			 }
+			 
+			else if(Action.estCouleur(liste.get(i).action)){
+				 liste.get(i).val = liste.get(i).val.toUpperCase();
+				 
+				 if(liste.get(i).val.equals("NOIR")){
+					 color = Color.BLACK;
+				 }
+				 else if(liste.get(i).val.equals("BLANC")){
+					 color = Color.WHITE;
+				 }
+				 else if(liste.get(i).val.equals("GRIS")){
+					 color = Color.GREY;
+				 }
+				 else if(liste.get(i).val.equals("BLEU")){
+					 color = Color.BLUE;
+				 }
+				 else if(liste.get(i).val.equals("VERT")){
+					 color = Color.GREEN;
+				 }
+				 else if(liste.get(i).val.equals("ROUGE")){
+					 color = Color.RED;
+				 }
+				 else if(liste.get(i).val.equals("ORANGE")){
+					 color = Color.ORANGE;
+				 }
+				 else if(liste.get(i).val.equals("JAUNE")){
+					 color = Color.YELLOW;
+				 }
+				 else if(liste.get(i).val.equals("ROSE")){
+					 color = Color.PINK;
+				 }
+				 else if(liste.get(i).val.equals("VIOLET")){
+					 color = Color.PURPLE;
+				 }
+				 else if(liste.get(i).val.equals("MARRON")){
+					 color = Color.BROWN;
+				 }
+				 gc.setFill(color);
+			 }
+			else if(liste.get(i).action.equals("LEVER")){
+				 colorSave = color;
+				 color = Color.WHITE;
+			 }
+			else if(liste.get(i).action.equals("POSER")){
+				 color = colorSave;
+			 }
+			
+			 
+			 
+			 
+			 
+		}
+		
+	
 	}
 
 
