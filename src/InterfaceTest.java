@@ -1,5 +1,7 @@
 import java.io.StreamTokenizer;
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.sun.glass.events.KeyEvent;
 import com.sun.prism.paint.Color;
@@ -18,6 +20,8 @@ import javafx.stage.Stage;
 public class InterfaceTest extends Application{
 	private StreamTokenizer st;
 	static final int TAILLECANVAS = 200;
+	TokenAnalyser tk = new TokenAnalyser();
+	ArrayList<LigneC> ligne = new ArrayList<>();
 
 	Canvas canvas = new Canvas();
 	TextArea commande = new TextArea();
@@ -55,28 +59,7 @@ public class InterfaceTest extends Application{
 
 		//streamtokenizer
 
-		Submit.setOnMouseClicked(e->{
-
-			try{
-				st=new StreamTokenizer(new StringReader(commande.getText()));
-
-				int type;
-				while ((type = st.nextToken()) != StreamTokenizer.TT_EOF) {
-					switch (type) {
-					case StreamTokenizer.TT_NUMBER:
-						System.out.println(st.nval);
-						break;
-					case StreamTokenizer.TT_WORD:
-						System.out.println(st.sval);
-						break;
-					}
-				}
-			}
-
-			catch (Exception E){
-
-			}
-		});
+		Submit.setOnMouseClicked(e->{ligne = tk.TokenAnalyse(commande.getText());});
 
 
 
