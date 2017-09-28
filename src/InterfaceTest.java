@@ -1,10 +1,4 @@
-import java.io.StreamTokenizer;
-import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import com.sun.glass.events.KeyEvent;
-import com.sun.prism.paint.Color;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -12,13 +6,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class InterfaceTest extends Application{
-	private StreamTokenizer st;
 	static final int TAILLECANVAS = 200;
 	TokenAnalyser tk = new TokenAnalyser();
 	ArrayList<LigneC> ligne = new ArrayList<>();
