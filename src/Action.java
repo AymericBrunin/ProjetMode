@@ -19,10 +19,6 @@ public class Action {
 		mot = mot.toUpperCase();
 		return mot.equals("AVANT");
 	}
-	static boolean estARRIERE(String mot) {
-		mot = mot.toUpperCase();
-		return mot.equals("ARRIERE");
-	}
 	static boolean estCouleur(String mot) {
 		mot = mot.toUpperCase();
 		return mot.equals("COULEUR");
@@ -31,8 +27,18 @@ public class Action {
 		mot = mot.toUpperCase();
 		return mot.equals("EPAISSEUR");
 	}
-	
-	
+	static boolean estPoser(String mot) {
+		mot = mot.toUpperCase();
+		return mot.equals("POSER");
+	}
+	static boolean estLever(String mot) {
+		mot = mot.toUpperCase();
+		return mot.equals("LEVER");
+	}
+	static boolean estAllera(String mot) {
+		mot = mot.toUpperCase();
+		return mot.equals("ALLERA");
+	}
 	
 	
 	}
