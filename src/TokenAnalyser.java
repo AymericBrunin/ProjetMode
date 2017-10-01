@@ -7,33 +7,47 @@ public class TokenAnalyser {
 	private StreamTokenizer st;
 	ArrayList<LigneC> commande = new ArrayList<>();
 	LigneC ligne;
-	public ArrayList<LigneC> TokenAnalyse(String s){
+	
+	public ArrayList<LigneC> tokenAnalyse(String s){
 		try{
 			st=new StreamTokenizer(new StringReader(s));
 			int type;
+			String parametre="";
+			String action = "";
 			while ((type = st.nextToken()) != StreamTokenizer.TT_EOF) {
-				
+
 				switch (type) {
 				case StreamTokenizer.TT_NUMBER:
-					//System.out.println(st.nval);
+					parametre = String.valueOf(st.nval);
 					break;
+					
 				case StreamTokenizer.TT_WORD:
-					//System.out.println(st.sval);
+					if(action.equals("")) {
+						action = st.sval;
+					}
+					else {
+						parametre = st.sval;
+					}
 					break;
 				}
-				if(correct(st.sval,st.nval+"",null)){
-				System.out.println(st.sval +" "+ st.nval);
-				commande.add(ligne = new LigneC(st.sval,st.nval+""));
-				}
+			}
+			//System.out.println(action+" "+parametre);
+			if(correct(action,parametre,null)){
+				//System.out.println("Valeur token :"+action +" "+ parametre);
+				commande.add(new LigneC(action,parametre));
 			}
 			commande.toString();
 		}
-		catch (Exception E){
-
+		catch (Exception e){
+			System.out.println(e.getMessage());
 		}
 		
 		return commande;
 	}
+	
+	
+	
+	
 	public boolean correct(String s,String s2,String s3){
 		boolean pc = false;
 		if(s.equals("DROITE")|| s.equals("GAUCHE") || s.equals("AVANT") || s.equals("EPAISSEUR")){
@@ -46,17 +60,17 @@ public class TokenAnalyser {
 		if(s.equals("POSER")){ if(s2 == null){pc = true;}}
 		if(s.equals("LEVER")){ if(s2 == null){pc = true;}}
 		if(s.equals("COULEUR")){
-			if(s.equals("NOIR")){ pc = true;}
-			if(s.equals("BLANC")){ pc = true;}
-			if(s.equals("GRIS")){ pc = true;}
-			if(s.equals("BLEU")){ pc = true;}
-			if(s.equals("VERT")){ pc = true;}
-			if(s.equals("ROUGE")){ pc = true;}
-			if(s.equals("JAUNE")){ pc = true;}
-			if(s.equals("ROSE")){ pc = true;}
-			if(s.equals("ORANGE")){ pc = true;}
-			if(s.equals("VIOLET")){ pc = true;}
-			if(s.equals("MARRON")){ pc = true;}			
+			if(s2.equals("NOIR")){ pc = true;}
+			if(s2.equals("BLANC")){ pc = true;}
+			if(s2.equals("GRIS")){ pc = true;}
+			if(s2.equals("BLEU")){ pc = true;}
+			if(s2.equals("VERT")){ pc = true;}
+			if(s2.equals("ROUGE")){ pc = true;}
+			if(s2.equals("JAUNE")){ pc = true;}
+			if(s2.equals("ROSE")){ pc = true;}
+			if(s2.equals("ORANGE")){ pc = true;}
+			if(s2.equals("VIOLET")){ pc = true;}
+			if(s2.equals("MARRON")){ pc = true;}			
 		}
 		
 

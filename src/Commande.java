@@ -8,7 +8,7 @@ public class Commande {
 	private Color color = Color.BLACK;
 	private Color colorSave = Color.BLACK;
 	private Action action;
-	private int distance=0;
+	//private int distance=0;
 	private int angle=0;
 	private GraphicsContext gc;
 	private Point tete;
@@ -19,26 +19,32 @@ public class Commande {
 		gc = g;
 		this.tete = tete;
 		liste = l;
+		angle = tete.getAngle();
+		
 	}
 	public void actionAvant(int i) {
 		Point p = new Point();
-		p = tete.createNewPoint(Integer.parseInt(liste.get(i).val), angle);
+		double conversionValeurDouble = Double.parseDouble(liste.get(i).val);
+		int conversionValeurInt = (int)(conversionValeurDouble);
+		p = tete.createNewPoint(conversionValeurInt, angle);
 		gc.strokeLine(tete.getX(), tete.getY(), p.getX(), p.getY() );
+		tete=p;
 	}
 	
 	public void drawLines(){
-	
 		for(int i=0;i<liste.size();i++){
-			
+			System.out.println(liste.get(i).action +" : "+liste.get(i).val);
 			if(Action.estAvant(liste.get(i).action)){
 				actionAvant(i);
 			}
 			else if(Action.estDroite(liste.get(i).action)){
 				 angle = calculAngleDroite(Integer.parseInt(liste.get(i).val), angle);
+				 tete.setAngle(angle);
 			 }
 			 
 			else if(Action.estGauche(liste.get(i).action)){
 				 angle = calculAngleGauche(Integer.parseInt(liste.get(i).val), angle);
+				 tete.setAngle(angle);
 			 }
 			 
 			else if(Action.estEpaisseur(liste.get(i).action)){
@@ -146,16 +152,6 @@ public class Commande {
 
 	public void setAction(Action action) {
 		this.action = action;
-	}
-
-
-	public int getDistance() {
-		return distance;
-	}
-
-
-	public void setDistance(int distance) {
-		this.distance = distance;
 	}
 
 

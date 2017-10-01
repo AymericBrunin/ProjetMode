@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -12,14 +14,16 @@ import javafx.stage.Stage;
 
 public class InterfaceTest extends Application{
 	static final int TAILLECANVAS = 200;
+	
 	TokenAnalyser tk = new TokenAnalyser();
-	ArrayList<LigneC> ligne = new ArrayList<>();
+	ArrayList<LigneC> listeCommande = new ArrayList<>();
 
 	Canvas canvas = new Canvas();
-	TextArea commande = new TextArea();
+	TextArea textCommande = new TextArea();
 	GraphicsContext gc = canvas.getGraphicsContext2D();
 
 	private Point pointTete = new Point(0,0,0);
+	private Commande commande;
 
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -30,35 +34,50 @@ public class InterfaceTest extends Application{
 		VBox interaction = new VBox();
 
 		//la Hbox Bouton contient les boutons d'interaction 
-		HBox Bouton = new HBox();
-		Button Avanc = new Button("Av");
-		Button Recul = new Button("Re");
-		Button Droite = new Button("Dr");
-		Button Gauche = new Button("Ga");
-		Button Epaisseur = new Button("Ep");
-		Button Couleur = new Button("Co");
+		HBox boutonDeplacement = new HBox();
+		Button avance = new Button("Av");
+		Button droite = new Button("Dr");
+		Button gauche = new Button("Ga");
+		Button epaisseur = new Button("Ep");
+		Button couleur = new Button("Co");
 
 		//la Hbox Menu contient les boutons du bas de l'interface
-		HBox Menu = new HBox();
-		Button Clear = new Button("Clear");
-		Button Submit = new Button("Submit");
-		Button Quit = new Button("Quit");
-		Menu.getChildren().addAll(Clear,Submit,Quit);
-		Bouton.getChildren().addAll(Avanc,Recul,Droite,Gauche,Epaisseur,Couleur);
+		HBox menu = new HBox();
+		Button clear = new Button("Clear");
+		Button submit = new Button("Submit");
+		Button quit = new Button("Quit");
+		menu.getChildren().addAll(clear,submit,quit);
+		boutonDeplacement.getChildren().addAll(avance,droite,gauche,epaisseur,couleur);
 		//Config du TextArea
-		commande.setMaxSize(210, 180);
-		interaction.getChildren().addAll(Bouton,commande,Menu);
+		textCommande.setMaxSize(210, 180);
+		interaction.getChildren().addAll(boutonDeplacement,textCommande,menu);
 
 		//streamtokenizer
 
-		Submit.setOnMouseClicked(e->{ligne = tk.TokenAnalyse(commande.getText());});
-
+		submit.setOnMouseClicked(e->{listeCommande = tk.tokenAnalyse(textCommande.getText());});
+		submit.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				listeCommande = tk.tokenAnalyse(textCommande.getText());
+				for(int i=0; i<listeCommande.size();i++) {
+					//System.out.println(listeCommande.get(i).action);
+					//System.out.println(listeCommande.get(i).val);
+				}
+				commande = new Commande(gc,pointTete,listeCommande);
+				commande.drawLines();
+				gc = commande.getGc();
+				pointTete = commande.getTete();
+				System.out.println("Bouton détecté fin de submit");
+				
+			}
+			
+		});
 
 
 		//Programmation Evenementielle
 
-		Clear.setOnMouseClicked(e->{gc.clearRect(0, 0, TAILLECANVAS, TAILLECANVAS);commande.clear();});
-		Quit.setOnMouseClicked(e->{stage.close();});
+		clear.setOnMouseClicked(e->{gc.clearRect(0, 0, TAILLECANVAS, TAILLECANVAS);textCommande.clear();});
+		quit.setOnMouseClicked(e->{stage.close();});
 		//Configuration du canvas
 		canvas.setWidth(TAILLECANVAS);
 		canvas.setHeight(TAILLECANVAS);	
