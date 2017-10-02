@@ -1,7 +1,6 @@
 import java.io.StreamTokenizer;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class TokenAnalyser {
 	private StreamTokenizer st;
