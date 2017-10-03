@@ -31,10 +31,11 @@ public class TokenAnalyser {
 				}
 			}
 			//System.out.println(action+" "+parametre);
-			if(correct(action,parametre,null)){
+			//Vérification mise de coté
+			 //if(correct(action,parametre,null)){
 				//System.out.println("Valeur token :"+action +" "+ parametre);
 				commande.add(new LigneC(action,parametre));
-			}
+			//}
 			commande.toString();
 		}
 		catch (Exception e){
@@ -46,7 +47,7 @@ public class TokenAnalyser {
 	
 	
 	
-	
+	/*  Vérification Mise de coté  
 	public boolean correct(String s,String s2,String s3){
 		boolean pc = false;
 		if(s.equals("DROITE")|| s.equals("GAUCHE") || s.equals("AVANT") || s.equals("EPAISSEUR")){
@@ -75,6 +76,7 @@ public class TokenAnalyser {
 
 		return pc ;
 	}
+	*/
 	public boolean estUnEntier(String s){
 		try{
 			Double.parseDouble(s);
