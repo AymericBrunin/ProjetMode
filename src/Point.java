@@ -21,6 +21,11 @@ public class Point extends Coordonnees{
 	public void setAngle(int angle) {
 		this.angle = angle;
 	}
+	public void reset() {
+		super.setX(0);
+		super.setY(0);
+		setAngle(0);
+	}
 	
 	/*
 	 * Calcul de la nouvelle position d'un point après déplacement(distance et angle)
@@ -28,8 +33,9 @@ public class Point extends Coordonnees{
 	 */
 	public Point createNewPoint(int distance, int angle) {
 		Point nouveauPoint = new Point();
-		nouveauPoint.setX((int)(this.getX()+distance*Math.cos(angle)));
-		nouveauPoint.setY((int)(this.getY()+distance*Math.sin(angle)));
+		System.out.println("ICI : "+ angle);
+		nouveauPoint.setX((int)(this.getX()+distance*Math.cos(Math.toRadians(angle))));
+		nouveauPoint.setY((int)(this.getY()+distance*Math.sin(Math.toRadians(angle))));
 		if(nouveauPoint.getX() > InterfaceTest.TAILLECANVAS) {
 			nouveauPoint.setX(InterfaceTest.TAILLECANVAS);
 		}

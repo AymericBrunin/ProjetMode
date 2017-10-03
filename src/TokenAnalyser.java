@@ -1,48 +1,50 @@
-import java.io.StreamTokenizer;
-import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.StringTokenizer;
 
 public class TokenAnalyser {
-	private StreamTokenizer st;
-	ArrayList<LigneC> commande = new ArrayList<>();
+	private StringTokenizer st;
+	ArrayList<LigneC> commande = new ArrayList<LigneC>();
 	LigneC ligne;
 	
 	public ArrayList<LigneC> tokenAnalyse(String s){
-		try{
-			st=new StreamTokenizer(new StringReader(s));
-			int type;
-			String parametre="";
-			String action = "";
-			while ((type = st.nextToken()) != StreamTokenizer.TT_EOF) {
-
-				switch (type) {
-				case StreamTokenizer.TT_NUMBER:
-					parametre = String.valueOf(st.nval);
-					break;
-					
-				case StreamTokenizer.TT_WORD:
-					if(action.equals("")) {
-						action = st.sval;
-					}
-					else {
-						parametre = st.sval;
-					}
-					break;
-				}
+		commande.clear();
+		st = new StringTokenizer(s);
+		List<String> mot = new ArrayList<String>();
+		
+		while(st.hasMoreTokens()){
+			mot.add(st.nextToken());
+		}
+		
+		boolean estAction = false;
+		String action ="";
+		int entier=0;
+		for(String boucle : mot) {
+			if((Action.estAvant(boucle) || Action.estDroite(boucle) || Action.estGauche(boucle) || Action.estEpaisseur(boucle)) && estAction == false) {
+				estAction = true;
+				action = boucle;
 			}
+			else if(estUnEntier(boucle) && estAction == true) {
+				entier = Integer.parseInt(boucle);
+				commande.add(new LigneC(action, String.valueOf(entier)));
+				estAction = false;
+			}
+			
+			else {
+				throw new NoSuchElementException();
+			}
+			
+		}
+		return commande;
+		
+
 			//System.out.println(action+" "+parametre);
 			//Vérification mise de coté
 			 //if(correct(action,parametre,null)){
 				//System.out.println("Valeur token :"+action +" "+ parametre);
-				commande.add(new LigneC(action,parametre));
+				//commande.add(new LigneC(action,parametre));
 			//}
-			commande.toString();
-		}
-		catch (Exception e){
-			System.out.println(e.getMessage());
-		}
-		
-		return commande;
 	}
 	
 	

@@ -102,29 +102,29 @@ public class InterfaceTest extends Application{
 
 		//STREAMTOKENIZER
 
-		submit.setOnMouseClicked(e->{listeCommande = tk.tokenAnalyse(textCommande.getText());});
 		submit.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
 				listeCommande = tk.tokenAnalyse(textCommande.getText());
-				for(int i=0; i<listeCommande.size();i++) {
-					//System.out.println(listeCommande.get(i).action);
-					//System.out.println(listeCommande.get(i).val);
-				}
 				commande = new Commande(gc,pointTete,listeCommande);
 				commande.drawLines();
 				gc = commande.getGc();
 				pointTete = commande.getTete();
 				System.out.println("Bouton detecte fin de submit");
-				
 			}
-			
 		});
 
 
 		//Programmation Evenementielle
-
-		clear.setOnMouseClicked(e->{gc.clearRect(0, 0, TAILLECANVAS, TAILLECANVAS);textCommande.clear();});
+		clear.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				gc.clearRect(0, 0, TAILLECANVAS, TAILLECANVAS);
+				textCommande.clear();
+				pointTete.reset();
+			}
+		});
+		
 		quit.setOnMouseClicked(e->{stage.close();});
 		
 		//Configuration du canvas

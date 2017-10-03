@@ -15,7 +15,7 @@ public class Commande {
 	private List<LigneC> liste;
 	private boolean positionLever = false;
 	
-	public Commande(GraphicsContext g, Point tete,ArrayList<LigneC> l){
+	public Commande(GraphicsContext g, Point tete, ArrayList<LigneC> l){
 		gc = g;
 		this.tete = tete;
 		liste = l;
