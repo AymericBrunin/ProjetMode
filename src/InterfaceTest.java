@@ -44,7 +44,7 @@ public class InterfaceTest extends Application{
 		Button arriere=new Button();
 		Image imgArriere=new Image(getClass().getResource("arriere.png").toExternalForm());
 		arriere.setGraphic(new ImageView(imgArriere));
-		arriere.setTooltip(new Tooltip("arrière"));		//les tooltip permettent de voir à quoi correspond un bouton en passant la souris dessus
+		arriere.setTooltip(new Tooltip("arriere"));		//les tooltip permettent de voir ï¿½ quoi correspond un bouton en passant la souris dessus
 		
 		Button avance = new Button();
 		Image imgAvance=new Image(getClass().getResource("avant.png").toExternalForm());
@@ -115,7 +115,7 @@ public class InterfaceTest extends Application{
 				commande.drawLines();
 				gc = commande.getGc();
 				pointTete = commande.getTete();
-				System.out.println("Bouton détecté fin de submit");
+				System.out.println("Bouton detecte fin de submit");
 				
 			}
 			
