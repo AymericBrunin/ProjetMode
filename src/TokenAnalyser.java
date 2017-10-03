@@ -25,6 +25,12 @@ public class TokenAnalyser {
 				estAction = true;
 				action = boucle;
 			}
+			else if((Action.estLever(boucle) || Action.estPoser(boucle)) && estAction == false) {
+				action = boucle;
+				commande.add(new LigneC(action));
+				estAction = false;
+			}
+			
 			else if(estUnEntier(boucle) && estAction == true) {
 				entier = Integer.parseInt(boucle);
 				commande.add(new LigneC(action, String.valueOf(entier)));

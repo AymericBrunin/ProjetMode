@@ -8,8 +8,6 @@ public class Commande {
 	private Color color = Color.BLACK;
 	private Color colorSave = Color.BLACK;
 	private Action action;
-	//private int distance=0;
-	private int angle=0;
 	private GraphicsContext gc;
 	private Point tete;
 	private List<LigneC> liste;
@@ -19,38 +17,45 @@ public class Commande {
 		gc = g;
 		this.tete = tete;
 		liste = l;
-		angle = tete.getAngle();
 		
 	}
 	public void actionAvant(int i) {
 		Point p = new Point();
+		p.setPose(tete.isPose());
 		double conversionValeurDouble = Double.parseDouble(liste.get(i).val);
 		int conversionValeurInt = (int)(conversionValeurDouble);
-		p = tete.createNewPoint(conversionValeurInt, angle);
-		gc.strokeLine(tete.getX(), tete.getY(), p.getX(), p.getY() );
+		p = tete.createNewPoint(conversionValeurInt, tete.getAngle(), tete.isPose());
+		if(p.isPose()) {
+			gc.strokeLine(tete.getX(), tete.getY(), p.getX(), p.getY() );
+		}
 		tete=p;
 	}
 	
 	public void drawLines(){
 		for(int i=0;i<liste.size();i++){
-			System.out.println(liste.get(i).action +" : "+liste.get(i).val);
+			System.out.println("ACTION EN COURS :"+liste.get(i).action +" : "+liste.get(i).val);
+			
 			if(Action.estAvant(liste.get(i).action)){
 				actionAvant(i);
 			}
 			else if(Action.estDroite(liste.get(i).action)){
-				 angle = calculAngleDroite(Integer.parseInt(liste.get(i).val), angle);
-				 tete.setAngle(angle);
+				 tete.setAngle(calculAngleDroite(Integer.parseInt(liste.get(i).val), tete.getAngle()));
 			 }
 			 
 			else if(Action.estGauche(liste.get(i).action)){
-				 angle = calculAngleGauche(Integer.parseInt(liste.get(i).val), angle);
-				 tete.setAngle(angle);
+				 tete.setAngle(calculAngleGauche(Integer.parseInt(liste.get(i).val), tete.getAngle()));
 			 }
 			 
 			else if(Action.estEpaisseur(liste.get(i).action)){
 				 gc.setLineWidth(Integer.parseInt(liste.get(i).val));
 				 
 			 }
+			else if(Action.estLever(liste.get(i).action)) {
+				tete.setPose(false);
+			}
+			else if(Action.estPoser(liste.get(i).action)) {
+				tete.setPose(true);
+			}
 			 
 			else if(Action.estCouleur(liste.get(i).action)){
 				 liste.get(i).val = liste.get(i).val.toUpperCase();
@@ -153,17 +158,6 @@ public class Commande {
 	public void setAction(Action action) {
 		this.action = action;
 	}
-
-
-	public int getAngle() {
-		return angle;
-	}
-
-
-	public void setAngle(int angle) {
-		this.angle = angle;
-	}
-
 
 	public GraphicsContext getGc() {
 		return gc;
