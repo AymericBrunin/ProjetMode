@@ -3,10 +3,10 @@ import java.util.List;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 public class Commande {
 	private Color color = Color.BLACK;
-	private Color colorSave = Color.BLACK;
 	private Action action;
 	private GraphicsContext gc;
 	private Point tete;
@@ -62,6 +62,9 @@ public class Commande {
 			else if(Action.estPoser(liste.get(i).action)) {
 				tete.setPose(true);
 			}
+			else if(Action.estAllera(liste.get(i).action)) {
+				gc.strokeLine(tete.getX(), tete.getY(),Integer.parseInt(liste.get(i).val), Integer.parseInt(liste.get(i).val2));	
+			}
 			 
 			else if(Action.estCouleur(liste.get(i).action)){
 				 liste.get(i).val = liste.get(i).val.toUpperCase();
@@ -99,19 +102,7 @@ public class Commande {
 				 else if(liste.get(i).val.equals("MARRON")){
 					 color = Color.BROWN;
 				 }
-				 gc.setFill(color);
-				 if(positionLever) { //Si le point est leve et que l'utilisateur change de couleur, rien ne se passe.
-					 gc.setFill(Color.WHITE);
-				 }
-			 }
-			else if(liste.get(i).action.equals("LEVER")){
-				 colorSave = color;
-				 color = Color.WHITE;
-				 positionLever = true;
-			 }
-			else if(liste.get(i).action.equals("POSER")){
-				 color = colorSave;
-				 positionLever = false;
+				 gc.setStroke(color);
 			 }
 		}
 	}
