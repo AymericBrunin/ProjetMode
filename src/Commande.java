@@ -30,7 +30,13 @@ public class Commande {
 		}
 		tete=p;
 	}
+	//allerA a besoin de deux parametre ---> modifie Tokenanalyser
+	public void allerA(){
+		
+	}
 	
+	//modifie le nom de la fonction pour quelle soit plus representative de son action
+	//ajout de allerA dans drawline
 	public void drawLines(){
 		for(int i=0;i<liste.size();i++){
 			System.out.println("ACTION EN COURS :"+liste.get(i).action +" : "+liste.get(i).val);
