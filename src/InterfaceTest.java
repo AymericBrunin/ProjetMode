@@ -112,7 +112,7 @@ public class InterfaceTest extends Application {
 				try {
 					commande.drawLines();
 				} catch (Exception e) {
-					textCommande.clear();
+					
 					e.printStackTrace();
 				}
 				gc = commande.getGc();
