@@ -109,7 +109,12 @@ public class InterfaceTest extends Application {
 			public void handle(ActionEvent arg0) {
 				listeCommande = tk.tokenAnalyse(textCommande.getText());
 				commande = new Commande(gc, pointTete, listeCommande);
-				commande.drawLines();
+				try {
+					commande.drawLines();
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+				}
 				gc = commande.getGc();
 				pointTete = commande.getTete();
 				System.out.println("Bouton detecte fin de submit");

@@ -30,19 +30,18 @@ public class Commande {
 		}
 		tete=p;
 	}
-	//allerA a besoin de deux parametre ---> modifie Tokenanalyser
-	public void allerA(){
-		
-	}
 	
-	//modifie le nom de la fonction pour quelle soit plus representative de son action
-	//ajout de allerA dans drawline
-	public void drawLines(){
+	public void drawLines() throws Exception{
 		for(int i=0;i<liste.size();i++){
 			System.out.println("ACTION EN COURS :"+liste.get(i).action +" : "+liste.get(i).val);
 			
 			if(Action.estAvant(liste.get(i).action)){
+				if(!positionLever){
 				actionAvant(i);
+				// modif paul ----------------------------------------------------------------------
+				}else{
+					throw new Exception("LA TETE DOIT ETRE POSEE POUR AVANCER");
+				}
 			}
 			else if(Action.estDroite(liste.get(i).action)){
 				 tete.setAngle(calculAngleDroite(Integer.parseInt(liste.get(i).val), tete.getAngle()));
@@ -58,12 +57,21 @@ public class Commande {
 			 }
 			else if(Action.estLever(liste.get(i).action)) {
 				tete.setPose(false);
+				positionLever=true;
 			}
 			else if(Action.estPoser(liste.get(i).action)) {
 				tete.setPose(true);
+				positionLever = false;
 			}
 			else if(Action.estAllera(liste.get(i).action)) {
+				if(positionLever){
 				gc.strokeLine(tete.getX(), tete.getY(),Integer.parseInt(liste.get(i).val), Integer.parseInt(liste.get(i).val2));	
+				// modif paul ------------------------------------------------------------------------------
+				}else{
+					throw new Exception("LA TETE DOIT ETRE LEVEE POUR UTILISER ALLERA");
+					//replace par une AlertBox dans le futur ?
+					
+				}
 			}
 			 
 			else if(Action.estCouleur(liste.get(i).action)){
