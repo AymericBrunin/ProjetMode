@@ -40,8 +40,7 @@ public class Commande {
 				actionAvant(i);
 				// modif paul ----------------------------------------------------------------------
 				}else{
-					AlertBox.display("EXCEPTION", "Pour pouvoir avancer il faut que la tete soit posee");
-					throw new Exception();
+					throw new Exception("LA TETE DOIT ETRE POSEE POUR AVANCER");
 				}
 			}
 			else if(Action.estDroite(liste.get(i).action)){
@@ -69,8 +68,9 @@ public class Commande {
 				gc.strokeLine(tete.getX(), tete.getY(),Integer.parseInt(liste.get(i).val), Integer.parseInt(liste.get(i).val2));	
 				// modif paul ------------------------------------------------------------------------------
 				}else{
-					AlertBox.display("EXCEPTION","La tete doit etre lever pour utilier allerA");
-					throw new Exception();
+					throw new Exception("LA TETE DOIT ETRE LEVEE POUR UTILISER ALLERA");
+					//replace par une AlertBox dans le futur ?
+					
 				}
 			}
 			 
