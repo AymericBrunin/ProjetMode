@@ -47,9 +47,16 @@ public class Point extends Coordonnees{
 		if(nouveauPoint.getX() > InterfaceTest.TAILLECANVAS) {
 			nouveauPoint.setX(InterfaceTest.TAILLECANVAS);
 		}
+		if(nouveauPoint.getX() < 0) {
+			nouveauPoint.setX(0);
+		}
 		if(nouveauPoint.getY() > InterfaceTest.TAILLECANVAS) {
 			nouveauPoint.setY(InterfaceTest.TAILLECANVAS);
 		}
+		if(nouveauPoint.getY() < 0) {
+			nouveauPoint.setY(0);
+		}
+		
 		return nouveauPoint;
 	}
 	

@@ -19,6 +19,10 @@ public class Action {
 		mot = mot.toUpperCase();
 		return mot.equals("AVANT");
 	}
+	static boolean estArriere(String mot) {
+		mot = mot.toUpperCase();
+		return mot.equals("ARRIERE");
+	}
 	static boolean estCouleur(String mot) {
 		mot = mot.toUpperCase();
 		return mot.equals("COULEUR");

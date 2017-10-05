@@ -18,6 +18,7 @@ public enum Couleur {
 	private Couleur(Color c){};
 	
 	static boolean estCouleur(String s) {
+		s=s.toUpperCase();
 		for(int i=0; i<Couleur.values().length;i++) {
 			if(s.equals(Couleur.values()[i].toString())){
 				return true;

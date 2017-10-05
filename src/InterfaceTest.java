@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -25,6 +26,8 @@ public class InterfaceTest extends Application {
 
 	Canvas canvas = new Canvas();
 	TextArea textCommande = new TextArea();
+	TextArea valeurBouton = new TextArea();
+	Label valeurBoutonlabel = new Label("Ajouter une valeur :");
 	GraphicsContext gc = canvas.getGraphicsContext2D();
 
 	private Point pointTete = new Point(0, 0, 0);
@@ -41,6 +44,7 @@ public class InterfaceTest extends Application {
 		// la Hbox Bouton contient les boutons d'interaction
 		HBox boutonDeplacement = new HBox();
 
+		
 		Button arriere = new Button();
 		Image imgArriere = new Image("File:images/arriere.png");// getClass().getResource("arriere.png").toExternalForm());
 		arriere.setGraphic(new ImageView(imgArriere));
@@ -91,6 +95,9 @@ public class InterfaceTest extends Application {
 		Image imgQuit = new Image("File:images/quit.png");// getClass().getResource("quit.png").toExternalForm());
 		quit.setGraphic(new ImageView(imgQuit));
 		quit.setTooltip(new Tooltip("quitter"));
+		
+		valeurBouton.setMaxWidth(287);
+		valeurBouton.setMaxHeight(10);
 
 		menu.getChildren().addAll(clear, submit, quit);
 		menu.setAlignment(Pos.BOTTOM_RIGHT);
@@ -100,24 +107,26 @@ public class InterfaceTest extends Application {
 		textCommande.setMinSize(100, 250);
 		textCommande.setMaxSize(288, 290);
 		textCommande.setFont(new Font("Trebuchet MS", 15));
-		interaction.getChildren().addAll(boutonDeplacement, textCommande, menu);
+		interaction.setSpacing(5);
+		interaction.getChildren().addAll(valeurBoutonlabel, valeurBouton, boutonDeplacement, textCommande, menu);
 
-		// STREAMTOKENIZER
+		avance.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				textCommande.insertText(textCommande.getCaretPosition(), "AVANT "+ valeurBouton.getText()+"\n");
+				
+			}
+			
+		});
 
 		submit.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
 				listeCommande = tk.tokenAnalyse(textCommande.getText());
 				commande = new Commande(gc, pointTete, listeCommande);
-				try {
-					commande.drawLines();
-				} catch (Exception e) {
-					
-					e.printStackTrace();
-				}
+				commande.drawLines();
 				gc = commande.getGc();
 				pointTete = commande.getTete();
-				System.out.println("Bouton detecte fin de submit");
 			}
 		});
 
@@ -140,12 +149,6 @@ public class InterfaceTest extends Application {
 		canvas.setHeight(TAILLECANVAS);
 
 		fenetre.getChildren().addAll(canvas, interaction);
-
-		// Test du dessin sur canvas. A midifier en methode != de lambda
-		// expression. Antoine
-		canvas.setOnMouseClicked(e -> {
-			gc.strokeLine(pointTete.getX(), pointTete.getY(), 50, 50);
-		});
 
 		Scene scene = new Scene(fenetre);
 		stage.setScene(scene);
