@@ -67,7 +67,11 @@ public class Commande {
 				tete.setPose(true);
 			}
 			else if(Action.estAllera(liste.get(i).action)) {
-				gc.strokeLine(tete.getX(), tete.getY(),Integer.parseInt(liste.get(i).val), Integer.parseInt(liste.get(i).val2));	
+				if(tete.isPose()) {
+					gc.strokeLine(tete.getX(), tete.getY(),Integer.parseInt(liste.get(i).val), Integer.parseInt(liste.get(i).val2));
+				}
+				tete.setX(Integer.parseInt(liste.get(i).val));
+				tete.setY(Integer.parseInt(liste.get(i).val2));
 			}
 			 
 			else if(Action.estCouleur(liste.get(i).action)){

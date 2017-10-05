@@ -48,6 +48,7 @@ public class TokenAnalyser {
 				if(estPremierEntier) {
 					commande.add(new LigneC(action, String.valueOf(entierAllerA), String.valueOf(boucle)));
 					estAllerA = false;
+					estPremierEntier = false;
 				}
 				else {
 					entierAllerA = Integer.parseInt(boucle);

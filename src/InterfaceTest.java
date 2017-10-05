@@ -114,7 +114,6 @@ public class InterfaceTest extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				textCommande.insertText(textCommande.getCaretPosition(), "AVANT "+ valeurBouton.getText()+"\n");
-				
 			}
 			
 		});
