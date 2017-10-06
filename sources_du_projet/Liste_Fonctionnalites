@@ -1,0 +1,31 @@
+Fonctionnalités :
+
+Action :
+	- AVANT <valeur>
+	- DROITE <valeur>
+	- GAUCHE <valeur>
+	- ARRIERE <valeur>
+	- POSER <valeur>
+	- LEVER <valeur>
+	- EPAISSEUR <valeur>
+	- ALLERA <valeur><valeur>
+	- COULEUR <Couleur>
+	
+	
+Couleurs disponibles :
+	-ROUGE
+	-BLEU
+	-VERT
+	-JAUNE
+	-ORANGE
+	-VIOLET
+	-GRIS
+	-NOIR
+	-BLANC
+	-ROSE
+	-MARRON
+	
+Boutons disponibles avec valeur paramètrable : Faciliter la saisie.
+Bouton clear pour revenir à zéro
+Bouton submit pour valider le text
+Bouton quitter

@@ -1,3 +1,4 @@
+package package_Bogo;
 
 public class Coordonnees {
 	private int x;

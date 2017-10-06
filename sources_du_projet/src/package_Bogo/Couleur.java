@@ -1,3 +1,4 @@
+package package_Bogo;
 
 public enum Couleur {
 	NOIR,

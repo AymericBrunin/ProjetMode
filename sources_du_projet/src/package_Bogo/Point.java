@@ -1,3 +1,4 @@
+package package_Bogo;
 
 public class Point extends Coordonnees{
 	private int angle;

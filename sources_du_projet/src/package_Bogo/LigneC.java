@@ -1,3 +1,4 @@
+package package_Bogo;
 
 public class LigneC {
 	public String action;
