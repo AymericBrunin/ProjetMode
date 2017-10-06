@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -117,10 +118,55 @@ public class InterfaceTest extends Application {
 			}
 			
 		});
+		
+		arriere.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				textCommande.insertText(textCommande.getCaretPosition(), "ARRIERE "+ valeurBouton.getText()+"\n");
+			}
+			
+		});
+		
+		droite.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				textCommande.insertText(textCommande.getCaretPosition(), "DROITE "+ valeurBouton.getText()+"\n");
+			}
+			
+		});
+		
+		gauche.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				textCommande.insertText(textCommande.getCaretPosition(), "GAUCHE "+ valeurBouton.getText()+"\n");
+			}
+		});
+		
+		lever.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				textCommande.insertText(textCommande.getCaretPosition(), "LEVER\n");
+			}
+			
+		});
+		
+		poser.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				textCommande.insertText(textCommande.getCaretPosition(), "POSER\n");
+			}
+			
+		});
 
 		submit.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
+				listeCommande.clear();
+				pointTete.reset();
+				pointTete.setPose(true);
+				gc.setStroke(Color.BLACK);
+				gc.clearRect(0, 0, TAILLECANVAS, TAILLECANVAS);
+				
 				listeCommande = tk.tokenAnalyse(textCommande.getText());
 				commande = new Commande(gc, pointTete, listeCommande);
 				commande.drawLines();
