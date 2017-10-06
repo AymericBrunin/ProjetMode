@@ -54,47 +54,47 @@ public class InterfaceTest extends Application {
 
 		
 		Button arriere = new Button();
-		Image imgArriere = new Image("File:ressources/arriere.png");
+		Image imgArriere = new Image("File:sources_du_projet/ressources/arriere.png");
 		arriere.setGraphic(new ImageView(imgArriere));
 		arriere.setTooltip(new Tooltip("arriere")); // les tooltips s'affichent lorsque la souris passe sur un bouton
 
 		Button avance = new Button();
-		Image imgAvance = new Image("File:ressources//avant.png");
+		Image imgAvance = new Image("File:sources_du_projet/ressources//avant.png");
 		avance.setGraphic(new ImageView(imgAvance));
 		avance.setTooltip(new Tooltip("avant"));
 
 		Button droite = new Button();
-		Image imgDroite = new Image("File:ressources/droite.png");
+		Image imgDroite = new Image("File:sources_du_projet/ressources/droite.png");
 		droite.setGraphic(new ImageView(imgDroite));
 		droite.setTooltip(new Tooltip("droite"));
 
 		Button gauche = new Button();
-		Image imgGauche = new Image("File:ressources/gauche.png");
+		Image imgGauche = new Image("File:sources_du_projet/ressources/gauche.png");
 		gauche.setGraphic(new ImageView(imgGauche));
 		gauche.setTooltip(new Tooltip("gauche"));
 
 		Button lever = new Button();
-		Image imgLever = new Image("File:ressources/lever.png");
+		Image imgLever = new Image("File:sources_du_projet/ressources/lever.png");
 		lever.setGraphic(new ImageView(imgLever));
 		lever.setTooltip(new Tooltip("lever le crayon"));
 
 		Button poser = new Button();
-		Image imgPoser = new Image("File:ressources/poser.png");
+		Image imgPoser = new Image("File:sources_du_projet/ressources/poser.png");
 		poser.setGraphic(new ImageView(imgPoser));
 		poser.setTooltip(new Tooltip("poser le crayon"));
 
 		Button clear = new Button();
-		Image imgClear = new Image("File:ressources/clear.png");
+		Image imgClear = new Image("File:sources_du_projet/ressources/clear.png");
 		clear.setGraphic(new ImageView(imgClear));
 		clear.setTooltip(new Tooltip("effacer"));
 
 		Button submit = new Button();
-		Image imgSubmit = new Image("File:ressources/submit.png");
+		Image imgSubmit = new Image("File:sources_du_projet/ressources/submit.png");
 		submit.setGraphic(new ImageView(imgSubmit));
 		submit.setTooltip(new Tooltip("dessiner"));
 
 		Button quit = new Button();
-		Image imgQuit = new Image("File:ressources/quit.png");
+		Image imgQuit = new Image("File:sources_du_projet/ressources/quit.png");
 		quit.setGraphic(new ImageView(imgQuit));
 		quit.setTooltip(new Tooltip("quitter"));
 		
