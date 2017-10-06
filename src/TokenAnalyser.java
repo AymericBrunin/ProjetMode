@@ -8,6 +8,12 @@ public class TokenAnalyser {
 	ArrayList<LigneC> commande = new ArrayList<LigneC>();
 	LigneC ligne;
 	
+	/**
+	 * Reçoit en paramètre le texte de l'utilisateur.
+	 * Vérification de la conformité du texte (Actions respectées, pas d'erreurs).
+	 * @param s
+	 * @return ArrayList<LigneC> (Liste de Commandes)
+	 */
 	public ArrayList<LigneC> tokenAnalyse(String s){
 		commande.clear();
 		st = new StringTokenizer(s);
@@ -74,7 +80,12 @@ public class TokenAnalyser {
 		return commande;
 
 	}
-
+	
+	/**
+	 * Renvoie Vrai si la chaine de caractere en entree est un entier
+	 * @param String s
+	 * @return boolean
+	 */
 	public boolean estUnEntier(String s){
 		try{
 			Double.parseDouble(s);

@@ -1,12 +1,20 @@
 
 public class Point extends Coordonnees{
 	private int angle;
-	private Coordonnees coord=new Coordonnees(0,0);
 	private boolean pose = true;
 	
+	/**
+	 * Constructeur vide
+	 */
 	public Point() {
 		super();
 	}
+	/**
+	 * Constructeur Point
+	 * @param x
+	 * @param y
+	 * @param angle
+	 */
 	public Point(int x, int y, int angle){
 		super(x,y);
 		if(angle >= 0 && angle <=360 ) {
@@ -14,29 +22,50 @@ public class Point extends Coordonnees{
 		}
 		else this.angle = 0;
 	}
-
+	
+	/**
+	 * Getter Angle
+	 * @return angle
+	 */
 	public int getAngle() {
 		return angle;
 	}
+	/**
+	 * Setter Angle
+	 * @param angle
+	 */
 	public void setAngle(int angle) {
 		this.angle = angle;
 	}
-	
+	/**
+	 * Vrai si le crayon est posé
+	 * @return boolean
+	 */
 	public boolean isPose() {
 		return pose;
 	}
+	/**
+	 * Setter de pose
+	 * @param pose
+	 */
 	public void setPose(boolean pose) {
 		this.pose = pose;
 	}
+	/**
+	 * Reset la tete du crayon
+	 */
 	public void reset() {
 		super.setX(0);
 		super.setY(0);
 		setAngle(0);
 	}
 	
-	/*
-	 * Calcul de la nouvelle position d'un point après déplacement(distance et angle)
-	 * 
+	/**
+	 * Crée un nouveau point grâce à une distance et un angle.
+	 * @param distance
+	 * @param angle
+	 * @param b
+	 * @return Point
 	 */
 	public Point createNewPoint(int distance, int angle, boolean b) {
 		Point nouveauPoint = new Point();

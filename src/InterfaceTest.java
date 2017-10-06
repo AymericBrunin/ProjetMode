@@ -38,78 +38,92 @@ public class InterfaceTest extends Application {
 	public void start(Stage stage) throws Exception {
 		// la Hbox fenetre contient tout
 		HBox fenetre = new HBox();
+		
+		// la Hbox Menu contient les boutons du bas de l'interface
+		HBox menu = new HBox();
 
 		// la Vbox interaction contient le text Field et tous les boutons
 		VBox interaction = new VBox();
 
 		// la Hbox Bouton contient les boutons d'interaction
 		HBox boutonDeplacement = new HBox();
+		
+		VBox groupeBouton = new VBox();
+		VBox groupeBoutonZoneDeSaisie = new VBox();
 
 		
 		Button arriere = new Button();
-		Image imgArriere = new Image("File:images/arriere.png");// getClass().getResource("arriere.png").toExternalForm());
+		Image imgArriere = new Image("File:images/arriere.png");
 		arriere.setGraphic(new ImageView(imgArriere));
-		arriere.setTooltip(new Tooltip("arriere")); // les tooltip permettent de
-													// voir � quoi correspond un
-													// bouton en passant la
-													// souris dessus
+		arriere.setTooltip(new Tooltip("arriere")); // les tooltips s'affichent lorsque la souris passe sur un bouton
 
 		Button avance = new Button();
-		Image imgAvance = new Image("File:images//avant.png");// getClass().getResource("avant.png").toExternalForm());
+		Image imgAvance = new Image("File:images//avant.png");
 		avance.setGraphic(new ImageView(imgAvance));
 		avance.setTooltip(new Tooltip("avant"));
 
 		Button droite = new Button();
-		Image imgDroite = new Image("File:images/droite.png");// getClass().getResource("droite.png").toExternalForm());
+		Image imgDroite = new Image("File:images/droite.png");
 		droite.setGraphic(new ImageView(imgDroite));
 		droite.setTooltip(new Tooltip("droite"));
 
 		Button gauche = new Button();
-		Image imgGauche = new Image("File:images/gauche.png");// getClass().getResource("gauche.png").toExternalForm());
+		Image imgGauche = new Image("File:images/gauche.png");
 		gauche.setGraphic(new ImageView(imgGauche));
 		gauche.setTooltip(new Tooltip("gauche"));
 
 		Button lever = new Button();
-		Image imgLever = new Image("File:images/lever.png");// getClass().getResource("lever.png").toExternalForm());
+		Image imgLever = new Image("File:images/lever.png");
 		lever.setGraphic(new ImageView(imgLever));
 		lever.setTooltip(new Tooltip("lever le crayon"));
 
 		Button poser = new Button();
-		Image imgPoser = new Image("File:images/poser.png");// getClass().getResource("poser.png").toExternalForm());
+		Image imgPoser = new Image("File:images/poser.png");
 		poser.setGraphic(new ImageView(imgPoser));
 		poser.setTooltip(new Tooltip("poser le crayon"));
 
-		// la Hbox Menu contient les boutons du bas de l'interface
-		HBox menu = new HBox();
-
 		Button clear = new Button();
-		Image imgClear = new Image("File:images/clear.png");// getClass().getResource("clear.png").toExternalForm());
+		Image imgClear = new Image("File:images/clear.png");
 		clear.setGraphic(new ImageView(imgClear));
 		clear.setTooltip(new Tooltip("effacer"));
 
 		Button submit = new Button();
-		Image imgSubmit = new Image("File:images/submit.png");// getClass().getResource("submit.png").toExternalForm());
+		Image imgSubmit = new Image("File:images/submit.png");
 		submit.setGraphic(new ImageView(imgSubmit));
 		submit.setTooltip(new Tooltip("dessiner"));
 
 		Button quit = new Button();
-		Image imgQuit = new Image("File:images/quit.png");// getClass().getResource("quit.png").toExternalForm());
+		Image imgQuit = new Image("File:images/quit.png");
 		quit.setGraphic(new ImageView(imgQuit));
 		quit.setTooltip(new Tooltip("quitter"));
+		
+		// Configuration du canvas
+		canvas.setWidth(TAILLECANVAS);
+		canvas.setHeight(TAILLECANVAS);
+
+		
+		// CONFIGURATION DU TEXTAREA
+		textCommande.setMinSize(100, 250);
+		textCommande.setMaxSize(288, 290);
+		textCommande.setFont(new Font("Trebuchet MS", 15));
 		
 		valeurBouton.setMaxWidth(287);
 		valeurBouton.setMaxHeight(10);
 
 		menu.getChildren().addAll(clear, submit, quit);
 		menu.setAlignment(Pos.BOTTOM_RIGHT);
+		
 		boutonDeplacement.getChildren().addAll(arriere, avance, gauche, droite, lever, poser);
-
-		// CONFIGURATION DU TEXTAREA
-		textCommande.setMinSize(100, 250);
-		textCommande.setMaxSize(288, 290);
-		textCommande.setFont(new Font("Trebuchet MS", 15));
-		interaction.setSpacing(5);
-		interaction.getChildren().addAll(valeurBoutonlabel, valeurBouton, boutonDeplacement, textCommande, menu);
+		groupeBouton.getChildren().addAll(valeurBoutonlabel, valeurBouton, boutonDeplacement);
+		
+		interaction.setSpacing(0);
+		interaction.getChildren().addAll(textCommande, menu);
+		
+		groupeBoutonZoneDeSaisie.setSpacing(20);
+		groupeBoutonZoneDeSaisie.getChildren().addAll(groupeBouton, interaction);
+		
+		fenetre.setSpacing(10);
+		fenetre.getChildren().addAll(canvas, groupeBoutonZoneDeSaisie);
 
 		avance.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -165,6 +179,7 @@ public class InterfaceTest extends Application {
 				pointTete.reset();
 				pointTete.setPose(true);
 				gc.setStroke(Color.BLACK);
+				gc.setLineWidth(1);
 				gc.clearRect(0, 0, TAILLECANVAS, TAILLECANVAS);
 				
 				listeCommande = tk.tokenAnalyse(textCommande.getText());
@@ -182,19 +197,14 @@ public class InterfaceTest extends Application {
 				gc.clearRect(0, 0, TAILLECANVAS, TAILLECANVAS);
 				textCommande.clear();
 				pointTete.reset();
+				pointTete.setPose(true);
 			}
 		});
 
 		quit.setOnMouseClicked(e -> {
 			stage.close();
 		});
-
-		// Configuration du canvas
-		canvas.setWidth(TAILLECANVAS);
-		canvas.setHeight(TAILLECANVAS);
-
-		fenetre.getChildren().addAll(canvas, interaction);
-
+		
 		Scene scene = new Scene(fenetre);
 		stage.setScene(scene);
 		stage.setTitle("Bogo");

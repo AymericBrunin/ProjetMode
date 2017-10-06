@@ -3,7 +3,6 @@ import java.util.List;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 
 public class Commande {
 	private Color color = Color.BLACK;
@@ -11,34 +10,23 @@ public class Commande {
 	private GraphicsContext gc;
 	private Point tete;
 	private List<LigneC> liste;
-	private boolean positionLever = false;
 	
+	/**
+	 * Constructeur
+	 * @param GraphicContext
+	 * @param Point 
+	 * @param ArrayList de LigneC (List de commandes)
+	 */
 	public Commande(GraphicsContext g, Point tete, ArrayList<LigneC> l){
 		gc = g;
 		this.tete = tete;
 		liste = l;
 		
 	}
-	public void actionDeplacement(int i, boolean estArriere) {
-		Point p = new Point();
-		p.setPose(tete.isPose());
-		double conversionValeurDouble = Double.parseDouble(liste.get(i).val);
-		int conversionValeurInt = (int)(conversionValeurDouble);
-		if(estArriere) {
-			p = tete.createNewPoint(-conversionValeurInt, tete.getAngle(), tete.isPose());
-		}
-		else {
-			p = tete.createNewPoint(conversionValeurInt, tete.getAngle(), tete.isPose());
-		}
-		
-		if(p.isPose()) {
-			gc.strokeLine(tete.getX(), tete.getY(), p.getX(), p.getY() );
-		}
-		tete=p;
-	}
-	
-	//modifie le nom de la fonction pour quelle soit plus representative de son action
-	//ajout de allerA dans drawline
+	/**
+	 * Realise les commandes données par l'utilisateur.
+	 * Modifie le GraphicContext, les angles, lever/poser, l'epaisseur
+	 */
 	public void drawLines(){
 		for(int i=0;i<liste.size();i++){
 			
@@ -115,6 +103,37 @@ public class Commande {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param int i (Indice de la commande concernee de la liste de commandes)
+	 * @param boolean estArriere (true si déplacement en arriere)
+	 * Realise le deplacement de la tete et modifie le GraphicContext
+	 */
+	public void actionDeplacement(int i, boolean estArriere) {
+		Point p = new Point();
+		p.setPose(tete.isPose());
+		double conversionValeurDouble = Double.parseDouble(liste.get(i).val);
+		int conversionValeurInt = (int)(conversionValeurDouble);
+		if(estArriere) {
+			p = tete.createNewPoint(-conversionValeurInt, tete.getAngle(), tete.isPose());
+		}
+		else {
+			p = tete.createNewPoint(conversionValeurInt, tete.getAngle(), tete.isPose());
+		}
+		
+		if(p.isPose()) {
+			gc.strokeLine(tete.getX(), tete.getY(), p.getX(), p.getY() );
+		}
+		tete=p;
+	}
+	
+	/**
+	 * 
+	 * @param valeur (Valeur à ajouter à l'angle de base)
+	 * @param angleTmp (Valeur de l'angle de base)
+	 * @return int (nouvel angle)
+	 * Fonction qui aplique l'angle à droite (0 <= angle <= 360), protection %360
+	 */
 	public int calculAngleDroite(int valeur, int angleTmp) {
 		int stockage=0;
 		while(valeur >=360){
@@ -130,6 +149,13 @@ public class Commande {
 		return angleTmp;
 	}
 	
+	/**
+	 * 
+	 * @param valeur (Valeur à ajouter à l'angle de base)
+	 * @param angleTmp (Valeur de l'angle de base)
+	 * @return int (nouvel angle)
+	 * Fonction qui aplique l'angle à gauche (0 <= angle <= 360), protection %360
+	 */
 	public int calculAngleGauche(int valeur, int angleTmp) {
 		int stockage = 0;
 		while(valeur >= 360) {
@@ -144,41 +170,66 @@ public class Commande {
 		}
 		return angleTmp;
 	}
-
+	/**
+	 * 
+	 * @return Color
+	 */
 	public Color getColor() {
 		return color;
 	}
 
-
+	/**
+	 * 
+	 * @param color
+	 */
 	public void setColor(Color color) {
 		this.color = color;
 	}
 
-
+	/**
+	 * 
+	 * @return Action
+	 */
 	public Action getAction() {
 		return action;
 	}
 
-
+	/**
+	 * 
+	 * @param action
+	 */
 	public void setAction(Action action) {
 		this.action = action;
 	}
-
+	
+	/**
+	 * 
+	 * @return GraphicContext
+	 */
 	public GraphicsContext getGc() {
 		return gc;
 	}
 
-
+	/**
+	 * 
+	 * @param gc
+	 */
 	public void setGc(GraphicsContext gc) {
 		this.gc = gc;
 	}
 
-
+	/**
+	 * 
+	 * @return Point
+	 */
 	public Point getTete() {
 		return tete;
 	}
 
-
+	/**
+	 * 
+	 * @param tete
+	 */
 	public void setTete(Point tete) {
 		this.tete = tete;
 	}

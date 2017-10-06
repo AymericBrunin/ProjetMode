@@ -1,22 +1,22 @@
-import javafx.scene.paint.Color;
 
 public enum Couleur {
-	NOIR(Color.BLACK),
-	BLANC(Color.WHITE),
-	GRIS(Color.GREY),
-	BLEU(Color.BLUE),
-	VERT(Color.GREEN),
-	ROUGE(Color.RED),
-	JAUNE(Color.YELLOW),
-	ROSE(Color.PINK),
-	ORANGE(Color.ORANGE),
-	VIOLET(Color.PURPLE),
-	MARRON(Color.BROWN);
+	NOIR,
+	BLANC,
+	GRIS,
+	BLEU,
+	VERT,
+	ROUGE,
+	JAUNE,
+	ROSE,
+	ORANGE,
+	VIOLET,
+	MARRON;
 	
-	Color c;
-	
-	private Couleur(Color c){};
-	
+	/**
+	 * Retourne Vrai si la chaine de caractere est une Couleur valide.
+	 * @param s
+	 * @return boolean
+	 */
 	static boolean estCouleur(String s) {
 		s=s.toUpperCase();
 		for(int i=0; i<Couleur.values().length;i++) {
