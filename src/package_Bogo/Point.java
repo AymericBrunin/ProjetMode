@@ -1,15 +1,17 @@
 package package_Bogo;
 
-public class Point extends Coordonnees{
+public class Point{
 	private int angle;
 	private boolean pose = true;
+	private int x;
+	private int y;
 	
 	/**
 	 * Constructeur vide
 	 */
 	public Point() {
-		super();
 	}
+	
 	/**
 	 * Constructeur Point
 	 * @param x
@@ -17,7 +19,8 @@ public class Point extends Coordonnees{
 	 * @param angle
 	 */
 	public Point(int x, int y, int angle){
-		super(x,y);
+		this.x=x;
+		this.y=y;
 		if(angle >= 0 && angle <=360 ) {
 			this.angle = angle;
 		}
@@ -56,11 +59,23 @@ public class Point extends Coordonnees{
 	 * Reset la tete du crayon
 	 */
 	public void reset() {
-		super.setX(0);
-		super.setY(0);
+		setX(0);
+		setY(0);
 		setAngle(0);
 	}
 	
+	public int getX() {
+		return x;
+	}
+	public void setX(int x) {
+		this.x = x;
+	}
+	public int getY() {
+		return y;
+	}
+	public void setY(int y) {
+		this.y = y;
+	}
 	/**
 	 * Crée un nouveau point grâce à une distance et un angle.
 	 * @param distance
