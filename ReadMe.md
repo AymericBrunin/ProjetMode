@@ -1,6 +1,6 @@
 Antoine TUROSTOWSKI
 Paul DUTOIT
-Sarah BERTINS
+Sarah BERTIN
 Aymeric Brunin
 
 Toutes les étapes ont été atteintes pour ce Jalon.
@@ -13,3 +13,6 @@ Réussites :
 	-Les travaux de chacuns ont été rassemblés facilement
 	-Apprendre à travailler avec des personnes différentes
 	-Entre-aide
+	
+
+[![pipeline status](https://git-iut.univ-lille1.fr/turostoa/ProjetMode2017-N4/badges/master/pipeline.svg)](https://git-iut.univ-lille1.fr/turostoa/ProjetMode2017-N4/commits/master)
