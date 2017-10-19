@@ -1,0 +1,111 @@
+package package_modele;
+
+public class PointModele {
+
+	
+	private int angle;
+	private boolean pose = true;
+	private int x;
+	private int y;
+	
+	/**
+	 * Constructeur vide
+	 */
+	public PointModele() {
+	}
+	
+	/**
+	 * Constructeur Point
+	 * @param x
+	 * @param y
+	 * @param angle
+	 */
+	public PointModele(int x, int y, int angle){
+		this.x=x;
+		this.y=y;
+		if(angle >= 0 && angle <=360 ) {
+			this.angle = angle;
+		}
+		else this.angle = 0;
+	}
+	
+	/**
+	 * Getter Angle
+	 * @return angle
+	 */
+	public int getAngle() {
+		return angle;
+	}
+	/**
+	 * Setter Angle
+	 * @param angle
+	 */
+	public void setAngle(int angle) {
+		this.angle = angle;
+	}
+	/**
+	 * Vrai si le crayon est pos�
+	 * @return boolean
+	 */
+	public boolean isPose() {
+		return pose;
+	}
+	/**
+	 * Setter de pose
+	 * @param pose
+	 */
+	public void setPose(boolean pose) {
+		this.pose = pose;
+	}
+	/**
+	 * Reset la tete du crayon
+	 */
+	public void reset() {
+		setX(0);
+		setY(0);
+		setAngle(0);
+	}
+	
+	public int getX() {
+		return x;
+	}
+	public void setX(int x) {
+		this.x = x;
+	}
+	public int getY() {
+		return y;
+	}
+	public void setY(int y) {
+		this.y = y;
+	}
+	/**
+	 * Cr�e un nouveau point gr�ce � une distance et un angle.
+	 * @param distance
+	 * @param angle
+	 * @param b
+	 * @return Point
+	 */
+	public PointModele createNewPoint(int distance, int angle, boolean b) {
+		PointModele nouveauPoint = new PointModele();
+		nouveauPoint.setAngle(angle);
+		nouveauPoint.setPose(b);
+		nouveauPoint.setX((int)(this.getX()+distance*Math.cos(Math.toRadians(angle))));
+		nouveauPoint.setY((int)(this.getY()+distance*Math.sin(Math.toRadians(angle))));
+		if(nouveauPoint.getX() > (ModeleBogo.getTAILLECANVAS())) {
+			nouveauPoint.setX(ModeleBogo.getTAILLECANVAS());
+		}
+		if(nouveauPoint.getX() < 0) {
+			nouveauPoint.setX(0);
+		}
+		if(nouveauPoint.getY() > ModeleBogo.getTAILLECANVAS()) {
+			nouveauPoint.setY(ModeleBogo.getTAILLECANVAS());
+		}
+		if(nouveauPoint.getY() < 0) {
+			nouveauPoint.setY(0);
+		}
+		
+		return nouveauPoint;
+	}
+	
+	
+}

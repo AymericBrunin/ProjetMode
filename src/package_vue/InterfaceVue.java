@@ -121,17 +121,13 @@ public class InterfaceVue implements Observer {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
+		
+		gc.strokeLine(modele.getPointCourant().getX(), modele.getPointCourant().getY(),modele.getPointDestination().getX(),modele.getPointDestination().getY());
+		
 		
 	}
 
