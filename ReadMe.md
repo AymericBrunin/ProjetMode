@@ -15,4 +15,4 @@ Réussites :
 	-Entre-aide
 	
 
-[![pipeline status](https://git-iut.univ-lille1.fr/ProjetMode2017-N4/badges/master/pipeline.svg)](https://git-iut.univ-lille1.fr/ProjetMode2017-N4/commits/master)
+[![pipeline status](https://git-iut.univ-lille1.fr/turostoa/ProjetMode2017-N4/badges/master/pipeline.svg)](https://git-iut.univ-lille1.fr/turostoa/ProjetMode2017-N4/commits/master)
