@@ -1,7 +1,7 @@
 image: mjalas/javafx
 
 build:
-  script: "cd src && javac ProjetMode2017-N4/InterfaceTest.java"
+  script: "cd src && javac package_Bogo/InterfaceTest.java"
   
 test:
   script:
