@@ -97,8 +97,8 @@ public class InterfaceVue implements Observer {
 		groupeBoutonZoneDeSaisie.setSpacing(20);
 		groupeBoutonZoneDeSaisie.getChildren().addAll(groupeBouton, interaction);
 		
-		canvas.setWidth(modele.getTaillecanvas());
-		canvas.setHeight(modele.getTaillecanvas());
+		canvas.setWidth(ModeleBogo.getTAILLECANVAS());
+		canvas.setHeight(ModeleBogo.getTAILLECANVAS());
 		
 		textCommande.setMinSize(100, 250);
 		textCommande.setMaxSize(288, 290);
