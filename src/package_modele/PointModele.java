@@ -108,6 +108,11 @@ public class PointModele {
 		return nouveauPoint;
 	}
 	
+	/**
+	 * Calcul l'angle de la commande "DROITE", modulo, limite à 360d
+	 * @param valeur a ajouter a l'angle courant
+	 * @return Integer du nouvel angle
+	 */
 	public int calculAngleDroite(int valeur) {
 		int stockage=0;
 		int angleTmp = getAngle();
@@ -120,6 +125,27 @@ public class PointModele {
 		}
 		else {
 			angleTmp += valeur;
+		}
+		return angleTmp;
+	}
+	
+	/**
+	 * Calcul l'angle de la commande "GAUCHE", modulo, limite à 360d
+	 * @param valeur a ajouter a l'angle courant
+	 * @return Integer du nouvel angle
+	 */
+	public int calculAngleGauche(int valeur) {
+		int stockage = 0;
+		int angleTmp = getAngle();
+		while(valeur >= 360) {
+			valeur -=360;
+		}
+		if(angleTmp-valeur < 0) {
+			stockage = angleTmp - valeur;
+			angleTmp = 360 + stockage;
+		}
+		else {
+			angleTmp -= valeur;
 		}
 		return angleTmp;
 	}

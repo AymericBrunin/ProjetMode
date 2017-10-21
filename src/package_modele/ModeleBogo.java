@@ -14,68 +14,122 @@ public class ModeleBogo extends Observable {
 	private PointModele pointDestination;
 	private TokenAnalyserModele tokenAnalyser;
 	private boolean estPoser;
+	private String couleur;
 	private List<String> scriptToken = new ArrayList<String>();
 	
 	
 	public ModeleBogo(PointModele p) {
 		pointCourant = p;
 		estPoser = true;
-		pointDestination = null;
+		pointDestination = new PointModele();
 		tokenAnalyser = new TokenAnalyserModele();
+		couleur = "NOIR";
 		
 	}
 	public void reset() {
 		pointCourant.reset();
-		pointDestination = null;
+		pointDestination.reset();
 		estPoser = true;
 	}
 	
 	public void avancer(int distance) {
-		if(estPoser) {
-			pointDestination = pointCourant.createNewPoint(distance);
-			actualiser();
-			pointCourant = pointDestination;
-		}
+		pointDestination = pointCourant.createNewPoint(distance);
+		actualiser();
+		pointCourant = pointDestination;
 	}
 	
 	public void droite(int valeurAngle) {
 		pointCourant.setAngle(pointCourant.calculAngleDroite(valeurAngle));
 	}
 	
+	public void gauche(int valeurAngle) {
+		pointCourant.setAngle(pointCourant.calculAngleGauche(valeurAngle));
+	}
+	/**
+	 * Fonction qui change les coordonnees des points dans le cas de la commande ALLERA
+	 * @param int valeurX
+	 * @param int valeurY
+	 */
+	public void allerA(int valeurX, int valeurY) {
+		pointDestination.setX(valeurX);
+		pointDestination.setY(valeurY);
+		actualiser();
+		pointCourant.setX(pointDestination.getX());
+		pointCourant.setY(pointDestination.getY());
+	}
+	
+	public void leverPoint() {
+		setEstPoser(false);
+	}
+	
+	public void poserPoint() {
+		setEstPoser(true);
+	}
+	
 	public void ajouteNouveauScript(String script) throws Exception {
 		reset();
 		tokenAnalyser.setScript(script);
-		System.out.println("script save");
 		tokenAnalyser.decoupeEnToken();
-		System.out.println("script decoupe");
 		if((tokenAnalyser.verificationScript())) {
 			scriptToken = tokenAnalyser.getListeMot();
 		}
 		else {
-			throw new Exception("La syntaxe du script n'est pa valide.");
+			throw new Exception("La syntaxe du script n'est pas valide.");
 		}
 		executeScript();
 	}
 	
 	public void executeScript() {
-		Iterator it = scriptToken.iterator();
+		Iterator<String> it = scriptToken.iterator();
 		String valCourante;
 		//On skip l'instruction SCRIPT de depart
-		valCourante = (String) it.next();
+		valCourante = it.next();
 		while(it.hasNext()) {
-			valCourante = (String)it.next();
+			valCourante = it.next();
 			if(valCourante.equals("AVANT")) {
-				avancer(Integer.parseInt((String) it.next()));
+				avancer(Integer.parseInt(it.next()));
 			}
 			else if(valCourante.equals("DROITE")) {
-				droite(Integer.parseInt((String) it.next()));
+				droite(Integer.parseInt(it.next()));
+			}
+			else if(valCourante.equals("GAUCHE")) {
+				gauche(Integer.parseInt(it.next()));
+			}
+			else if(valCourante.equals("LEVER")) {
+				leverPoint();
+			}
+			else if(valCourante.equals("POSER")) {
+				poserPoint();
+			}
+			else if(valCourante.equals("COULEUR")) {
+				setCouleur(it.next());
+			}
+			else if (valCourante.equals("ALLERA")) {
+				int valeurX = Integer.parseInt(it.next());
+				it.next(); //Pour passer la virgule :-)
+				int valeurY = Integer.parseInt(it.next());
+				allerA(valeurX, valeurY);
+				
 			}
 		}
-		actualiser();
+		//actualiser();
 	}
 	
 	
 	
+	public String getCouleur() {
+		return couleur;
+	}
+	public void setCouleur(String couleur) {
+		this.couleur = couleur;
+	}
+	public void setEstPoser(boolean estPoser) {
+		this.estPoser = estPoser;
+	}
+	
+	public boolean isEstPoser() {
+		return estPoser;
+	}
 	public PointModele getPointCourant() {
 		return pointCourant;
 	}

@@ -20,7 +20,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import package_Bogo.Commande;
 import package_modele.ModeleBogo;
 
 public class InterfaceVue implements Observer {
@@ -92,6 +91,8 @@ public class InterfaceVue implements Observer {
 		menu.getChildren().addAll(clear, submit, quit);
 		menu.setAlignment(Pos.BOTTOM_RIGHT);
 		
+		valeurBoutonLabel.setText("Valeur :");
+		
 		boutonDeplacement.getChildren().addAll(arriere, avance, gauche, droite, lever, poser);
 		groupeBouton.getChildren().addAll(valeurBoutonLabel, valeurBouton, boutonDeplacement);
 		
@@ -139,9 +140,30 @@ public class InterfaceVue implements Observer {
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		gc.strokeLine(modele.getPointCourant().getX(), modele.getPointCourant().getY(),modele.getPointDestination().getX(),modele.getPointDestination().getY());
-		
-		
+		if(modele.isEstPoser()) {
+			gc.setStroke(choixCouleur(modele.getCouleur()));
+			gc.strokeLine(modele.getPointCourant().getX(), modele.getPointCourant().getY(),modele.getPointDestination().getX(),modele.getPointDestination().getY());
+		}
+	}
+	
+	/**
+	 * Renvoie l'objet Color correspondant a la String passee en parametre
+	 * @param String s
+	 * @return Color
+	 */
+	public Color choixCouleur(String s) {
+		if(s.equals("ROUGE")) return Color.RED;
+		else if(s.equals("VERT")) return Color.GREEN;
+		else if(s.equals("BLEU")) return Color.BLUE;
+		else if(s.equals("ROSE")) return Color.PINK;
+		else if(s.equals("BLANC")) return Color.WHITE;
+		else if(s.equals("VIOLET")) return Color.PURPLE;
+		else if(s.equals("JAUNE")) return Color.YELLOW;
+		else if(s.equals("ORANGE")) return Color.ORANGE;
+		else if(s.equals("MARRON")) return Color.BROWN;
+		else if(s.equals("GRIS")) return Color.GREY;
+		else if(s.equals("ROUGE")) return Color.RED;
+		else return Color.BLACK;
 	}
 
 }

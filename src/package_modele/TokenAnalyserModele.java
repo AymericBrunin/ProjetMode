@@ -5,8 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import package_Bogo.LigneC;
-
 public class TokenAnalyserModele {
 	private StringTokenizer st;
 	private List<String> listeMot;
@@ -34,7 +32,7 @@ public class TokenAnalyserModele {
 	}
 	
 	public boolean verificationScript() {
-		Iterator it = listeMot.iterator();
+		Iterator<String> it = listeMot.iterator();
 		String valCourante;
 		
 		if(listeMot.isEmpty()) return true;
@@ -42,17 +40,21 @@ public class TokenAnalyserModele {
 		if(!it.next().equals("SCRIPT")) return false;
 		
 		while(it.hasNext()) {
-			valCourante = (String)it.next();
+			valCourante = it.next();
 			System.out.println("Valeur courante : "+valCourante);
 			
-			if(valCourante.equals("AVANT") && !estUnEntier((String) it.next())) {
-				System.out.println("FALSEFALSE");
+			if(valCourante.equals("AVANT") && !estUnEntier(it.next())) {
 				return false;
 			}
-			else if(valCourante.equals("DROITE") && !estUnEntier((String) it.next())) return false;
-		
+			else if(valCourante.equals("DROITE") && !estUnEntier(it.next())) return false;
+			else if(valCourante.equals("GAUCHE") && !estUnEntier(it.next())) return false;
+			else if(valCourante.equals("LEVER") || valCourante.equals("POSER"));
+			else if(valCourante.equals("COULEUR") && !EnumCouleurModele.estCouleur(it.next())) return false;
+			else if(valCourante.equals("ALLERA") && (!estUnEntier(it.next()) || !it.next().equals(",") || !estUnEntier(it.next()))) return false;
+			
+			if(valCourante.equals("FIN")) return true;
 		}
-		return true;
+		return false;
 		
 	}
 	
