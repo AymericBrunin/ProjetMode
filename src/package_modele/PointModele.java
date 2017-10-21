@@ -47,7 +47,7 @@ public class PointModele {
 	 * Vrai si le crayon est pos�
 	 * @return boolean
 	 */
-	public boolean isPose() {
+	public boolean getPoser() {
 		return pose;
 	}
 	/**
@@ -85,12 +85,13 @@ public class PointModele {
 	 * @param b
 	 * @return Point
 	 */
-	public PointModele createNewPoint(int distance, int angle, boolean b) {
+	public PointModele createNewPoint(int distance) {
 		PointModele nouveauPoint = new PointModele();
-		nouveauPoint.setAngle(angle);
-		nouveauPoint.setPose(b);
-		nouveauPoint.setX((int)(this.getX()+distance*Math.cos(Math.toRadians(angle))));
-		nouveauPoint.setY((int)(this.getY()+distance*Math.sin(Math.toRadians(angle))));
+		nouveauPoint.setAngle(getAngle());
+		nouveauPoint.setPose(getPoser());
+		nouveauPoint.setX((int)(this.getX()+distance*Math.cos(Math.toRadians(getAngle()))));
+		nouveauPoint.setY((int)(this.getY()+distance*Math.sin(Math.toRadians(getAngle()))));
+		
 		if(nouveauPoint.getX() > (ModeleBogo.getTAILLECANVAS())) {
 			nouveauPoint.setX(ModeleBogo.getTAILLECANVAS());
 		}
@@ -105,6 +106,22 @@ public class PointModele {
 		}
 		
 		return nouveauPoint;
+	}
+	
+	public int calculAngleDroite(int valeur) {
+		int stockage=0;
+		int angleTmp = getAngle();
+		while(valeur >=360){
+			valeur -= 360;
+		}
+		if(angleTmp+valeur >= 360) {
+			stockage = (angleTmp + valeur) - 360;
+			angleTmp = stockage;
+		}
+		else {
+			angleTmp += valeur;
+		}
+		return angleTmp;
 	}
 	
 	

@@ -3,6 +3,8 @@ package package_vue;
 import java.util.Observable;
 import java.util.Observer;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -15,8 +17,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import package_Bogo.Commande;
 import package_modele.ModeleBogo;
 
 public class InterfaceVue implements Observer {
@@ -108,6 +112,21 @@ public class InterfaceVue implements Observer {
 		valeurBouton.setMaxHeight(10);
 		
 		
+		//Actions des boutons
+		
+		submit.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				try {
+					gc.clearRect(0, 0, ModeleBogo.getTAILLECANVAS(), ModeleBogo.getTAILLECANVAS());
+					modele.ajouteNouveauScript(textCommande.getText());
+				}catch(Exception e) {
+					System.out.println(e.getMessage()+" Probleme");
+				}
+			}
+		});
+		
+		
 		
 		fenetre.setSpacing(10);
 		fenetre.getChildren().addAll(canvas, groupeBoutonZoneDeSaisie);
@@ -118,14 +137,8 @@ public class InterfaceVue implements Observer {
 		
 	}
 	
-	
-	
-	
-
-	
 	@Override
 	public void update(Observable o, Object arg) {
-		
 		gc.strokeLine(modele.getPointCourant().getX(), modele.getPointCourant().getY(),modele.getPointDestination().getX(),modele.getPointDestination().getY());
 		
 		
