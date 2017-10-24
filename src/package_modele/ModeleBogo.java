@@ -10,6 +10,7 @@ public class ModeleBogo extends Observable {
 	
 	private static final int TAILLECANVAS = 300;
 	
+	private static ModeleBogo instance = null;
 	private PointModele pointCourant;
 	private PointModele pointDestination;
 	private TokenAnalyserModele tokenAnalyser;
@@ -17,8 +18,15 @@ public class ModeleBogo extends Observable {
 	private String couleur;
 	private List<String> scriptToken = new ArrayList<String>();
 	
+	public static ModeleBogo getInstance(PointModele p){
+		if(instance == null){
+			instance = new ModeleBogo(p);
+		}
+		return instance;
+	}
 	
-	public ModeleBogo(PointModele p) {
+	
+	private ModeleBogo(PointModele p) {
 		pointCourant = p;
 		estPoser = true;
 		pointDestination = new PointModele();
