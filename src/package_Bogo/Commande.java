@@ -25,7 +25,7 @@ public class Commande {
 		
 	}
 	/**
-	 * Realise les commandes données par l'utilisateur.
+	 * Realise les commandes donnï¿½es par l'utilisateur.
 	 * Modifie le GraphicContext, les angles, lever/poser, l'epaisseur
 	 */
 	public void drawLines(){
@@ -107,7 +107,7 @@ public class Commande {
 	/**
 	 * 
 	 * @param int i (Indice de la commande concernee de la liste de commandes)
-	 * @param boolean estArriere (true si déplacement en arriere)
+	 * @param boolean estArriere (true si deplacement en arriere)
 	 * Realise le deplacement de la tete et modifie le GraphicContext
 	 */
 	public void actionDeplacement(int i, boolean estArriere) {
@@ -130,10 +130,10 @@ public class Commande {
 	
 	/**
 	 * 
-	 * @param valeur (Valeur à ajouter à l'angle de base)
+	 * @param valeur (Valeur a ajouter a l'angle de base)
 	 * @param angleTmp (Valeur de l'angle de base)
 	 * @return int (nouvel angle)
-	 * Fonction qui aplique l'angle à droite (0 <= angle <= 360), protection %360
+	 * Fonction qui applique l'angle a droite (0 <= angle <= 360), protection %360
 	 */
 	public int calculAngleDroite(int valeur, int angleTmp) {
 		int stockage=0;
@@ -152,10 +152,10 @@ public class Commande {
 	
 	/**
 	 * 
-	 * @param valeur (Valeur à ajouter à l'angle de base)
+	 * @param valeur (Valeur a ajouter a l'angle de base)
 	 * @param angleTmp (Valeur de l'angle de base)
 	 * @return int (nouvel angle)
-	 * Fonction qui aplique l'angle à gauche (0 <= angle <= 360), protection %360
+	 * Fonction qui applique l'angle a gauche (0 <= angle <= 360), protection %360
 	 */
 	public int calculAngleGauche(int valeur, int angleTmp) {
 		int stockage = 0;

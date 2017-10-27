@@ -10,8 +10,8 @@ public class TokenAnalyser {
 	LigneC ligne;
 	
 	/**
-	 * Reçoit en paramètre le texte de l'utilisateur.
-	 * Vérification de la conformité du texte (Actions respectées, pas d'erreurs).
+	 * Recoit en paramatre le texte de l'utilisateur.
+	 * Verification de la conformite du texte (Actions respectees, pas d'erreurs).
 	 * @param s
 	 * @return ArrayList<LigneC> (Liste de Commandes)
 	 */

@@ -42,7 +42,7 @@ public class Point{
 		this.angle = angle;
 	}
 	/**
-	 * Vrai si le crayon est posé
+	 * Vrai si le crayon est pose
 	 * @return boolean
 	 */
 	public boolean isPose() {
@@ -77,7 +77,7 @@ public class Point{
 		this.y = y;
 	}
 	/**
-	 * Crée un nouveau point grâce à une distance et un angle.
+	 * Cree un nouveau point grace a une distance et un angle.
 	 * @param distance
 	 * @param angle
 	 * @param b

@@ -44,7 +44,7 @@ public class PointModele {
 		this.angle = angle;
 	}
 	/**
-	 * Vrai si le crayon est posï¿½
+	 * Vrai si le crayon est pose
 	 * @return boolean
 	 */
 	public boolean getPoser() {
@@ -79,7 +79,7 @@ public class PointModele {
 		this.y = y;
 	}
 	/**
-	 * Crï¿½e un nouveau point grï¿½ce ï¿½ une distance et un angle.
+	 * Cree un nouveau point grace a une distance et un angle.
 	 * @param distance
 	 * @param angle
 	 * @param b
@@ -109,7 +109,7 @@ public class PointModele {
 	}
 	
 	/**
-	 * Calcul l'angle de la commande "DROITE", modulo, limite à 360d
+	 * Calcul l'angle de la commande "DROITE", modulo, limite a 360d
 	 * @param valeur a ajouter a l'angle courant
 	 * @return Integer du nouvel angle
 	 */
@@ -130,7 +130,7 @@ public class PointModele {
 	}
 	
 	/**
-	 * Calcul l'angle de la commande "GAUCHE", modulo, limite à 360d
+	 * Calcul l'angle de la commande "GAUCHE", modulo, limite a 360d
 	 * @param valeur a ajouter a l'angle courant
 	 * @return Integer du nouvel angle
 	 */

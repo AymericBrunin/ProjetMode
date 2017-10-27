@@ -3,7 +3,7 @@ package package_Bogo;
 public class Action {
 	
 	/**
-	 * Vérifie si le paramètre est l'action DROITE
+	 * Verifie si le parametre est l'action DROITE
 	 * @param mot
 	 * @return boolean
 	 */
@@ -12,7 +12,7 @@ public class Action {
 		return mot.equals("DROITE");
 	}
 	/**
-	 * Vérifie si le paramètre est l'action GAUCHE
+	 * Verifie si le parametre est l'action GAUCHE
 	 * @param mot
 	 * @return boolean
 	 */
@@ -21,7 +21,7 @@ public class Action {
 		return mot.equals("GAUCHE");
 	}
 	/**
-	 * Vérifie si le paramètre est l'action AVANT
+	 * Verifie si le parametre est l'action AVANT
 	 * @param mot
 	 * @return boolean
 	 */
@@ -30,7 +30,7 @@ public class Action {
 		return mot.equals("AVANT");
 	}
 	/**
-	 * Vérifie si le paramètre est l'action ARRIERE
+	 * Verifie si le parametre est l'action ARRIERE
 	 * @param mot
 	 * @return boolean
 	 */
@@ -39,7 +39,7 @@ public class Action {
 		return mot.equals("ARRIERE");
 	}
 	/**
-	 * Vérifie si le paramètre est l'action COULEUR
+	 * Verifie si le parametre est l'action COULEUR
 	 * @param mot
 	 * @return boolean
 	 */
@@ -48,7 +48,7 @@ public class Action {
 		return mot.equals("COULEUR");
 	}
 	/**
-	 * Vérifie si le paramètre est l'action EPAISSEUR
+	 * Verifie si le parametre est l'action EPAISSEUR
 	 * @param mot
 	 * @return boolean
 	 */
@@ -57,7 +57,7 @@ public class Action {
 		return mot.equals("EPAISSEUR");
 	}
 	/**
-	 * Vérifie si le paramètre est l'action POSER
+	 * Verifie si le parametre est l'action POSER
 	 * @param mot
 	 * @return boolean
 	 */
@@ -66,7 +66,7 @@ public class Action {
 		return mot.equals("POSER");
 	}
 	/**
-	 * Vérifie si le paramètre est l'action LEVER
+	 * Verifie si le parametre est l'action LEVER
 	 * @param mot
 	 * @return boolean
 	 */
@@ -75,7 +75,7 @@ public class Action {
 		return mot.equals("LEVER");
 	}
 	/**
-	 * Vérifie si le paramètre est l'action ALLERA
+	 * Verifie si le parametre est l'action ALLERA
 	 * @param mot
 	 * @return boolean
 	 */

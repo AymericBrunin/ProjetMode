@@ -3,15 +3,15 @@ Paul DUTOIT
 Sarah BERTIN
 Aymeric Brunin
 
-Toutes les étapes ont été atteintes pour ce Jalon.
+Toutes les etapes ont ete atteintes pour ce Jalon.
 
-Difficultés :
+Difficultes :
 	-Coordination entre nous
-	-Travail mal réparti
+	-Travail mal reparti
 	
-Réussites :
-	-Les travaux de chacuns ont été rassemblés facilement
-	-Apprendre à travailler avec des personnes différentes
+Rï¿½ussites :
+	-Les travaux de chacuns ont ete rassembles facilement
+	-Apprendre a travailler avec des personnes differentes
 	-Entre-aide
 	
 
