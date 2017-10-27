@@ -3,6 +3,8 @@ package package_vue;
 import java.util.Observable;
 import java.util.Observer;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -15,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import package_modele.ModeleBogo;
@@ -88,6 +91,8 @@ public class InterfaceVue implements Observer {
 		menu.getChildren().addAll(clear, submit, quit);
 		menu.setAlignment(Pos.BOTTOM_RIGHT);
 		
+		valeurBoutonLabel.setText("Valeur :");
+		
 		boutonDeplacement.getChildren().addAll(arriere, avance, gauche, droite, lever, poser);
 		groupeBouton.getChildren().addAll(valeurBoutonLabel, valeurBouton, boutonDeplacement);
 		
@@ -108,6 +113,21 @@ public class InterfaceVue implements Observer {
 		valeurBouton.setMaxHeight(10);
 		
 		
+		//Actions des boutons
+		
+		submit.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				try {
+					gc.clearRect(0, 0, ModeleBogo.getTAILLECANVAS(), ModeleBogo.getTAILLECANVAS());
+					modele.ajouteNouveauScript(textCommande.getText());
+				}catch(Exception e) {
+					System.out.println(e.getMessage()+" Probleme");
+				}
+			}
+		});
+		
+		
 		
 		fenetre.setSpacing(10);
 		fenetre.getChildren().addAll(canvas, groupeBoutonZoneDeSaisie);
@@ -118,21 +138,32 @@ public class InterfaceVue implements Observer {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+		if(modele.isEstPoser()) {
+			gc.setStroke(choixCouleur(modele.getCouleur()));
+			gc.strokeLine(modele.getPointCourant().getX(), modele.getPointCourant().getY(),modele.getPointDestination().getX(),modele.getPointDestination().getY());
+		}
+	}
+	
+	/**
+	 * Renvoie l'objet Color correspondant a la String passee en parametre
+	 * @param String s
+	 * @return Color
+	 */
+	public Color choixCouleur(String s) {
+		if(s.equals("ROUGE")) return Color.RED;
+		else if(s.equals("VERT")) return Color.GREEN;
+		else if(s.equals("BLEU")) return Color.BLUE;
+		else if(s.equals("ROSE")) return Color.PINK;
+		else if(s.equals("BLANC")) return Color.WHITE;
+		else if(s.equals("VIOLET")) return Color.PURPLE;
+		else if(s.equals("JAUNE")) return Color.YELLOW;
+		else if(s.equals("ORANGE")) return Color.ORANGE;
+		else if(s.equals("MARRON")) return Color.BROWN;
+		else if(s.equals("GRIS")) return Color.GREY;
+		else if(s.equals("ROUGE")) return Color.RED;
+		else return Color.BLACK;
 	}
 
 }

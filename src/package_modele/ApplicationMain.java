@@ -8,7 +8,7 @@ public class ApplicationMain extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		ModeleBogo modele = new ModeleBogo();
+		ModeleBogo modele = ModeleBogo.getInstance(new PointModele(0,0,0));
 		InterfaceVue vue = new InterfaceVue(modele);
 	}
 	
