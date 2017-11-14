@@ -122,6 +122,8 @@ public class InterfaceVue implements Observer {
 		textCommande.setMinSize(100, 250);
 		textCommande.setMaxSize(288, 290);
 		textCommande.setFont(new Font("Trebuchet MS", 15));
+		String defaut = "SCRIPT AVANT 100 DROITE 90 AVANT 100 FIN";
+		textCommande.setPromptText(defaut);
 		
 		valeurBouton.setMaxWidth(287);
 		valeurBouton.setMaxHeight(10);
@@ -133,7 +135,9 @@ public class InterfaceVue implements Observer {
 			public void handle(ActionEvent arg0) {
 				try {
 					gc.clearRect(0, 0, ModeleBogo.getTAILLECANVAS(), ModeleBogo.getTAILLECANVAS());
-					modele.ajouteNouveauScript(textCommande.getText());
+					if(!textCommande.getText().equals("")){
+						modele.ajouteNouveauScript(textCommande.getText());
+					}else{modele.ajouteNouveauScript(defaut);}
 				}catch(Exception e) {
 					System.out.println(e.getMessage()+" Probleme");
 				}
