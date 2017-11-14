@@ -1,5 +1,10 @@
 package package_vue;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -19,8 +24,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import package_modele.ModeleBogo;
+
 
 public class InterfaceVue implements Observer {
 
@@ -41,6 +48,9 @@ public class InterfaceVue implements Observer {
 	private Button clear = new Button();
 	private Button submit = new Button();
 	private Button quit = new Button();
+	///////Bouton enregistrer(paul)
+	private Button save = new Button();
+	//////////////////////////////////
 	private Canvas canvas = new Canvas();
 	private TextArea textCommande = new TextArea();
 	private TextArea valeurBouton = new TextArea();
@@ -87,8 +97,12 @@ public class InterfaceVue implements Observer {
 		Image imgQuit = new Image("File:sources_du_projet/ressources/quit.png");
 		quit.setGraphic(new ImageView(imgQuit));
 		quit.setTooltip(new Tooltip("quitter"));
+		
+		////////////Mise en forme du bouton sauvegarder(paul)
+		save.setText("Sauvegarder"); // temporaire
+		save.setTooltip(new Tooltip("Sauvegarder"));
 				
-		menu.getChildren().addAll(clear, submit, quit);
+		menu.getChildren().addAll(save, clear, submit, quit);
 		menu.setAlignment(Pos.BOTTOM_RIGHT);
 		
 		valeurBoutonLabel.setText("Valeur :");
@@ -116,7 +130,6 @@ public class InterfaceVue implements Observer {
 		//Actions des boutons
 		
 		submit.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
 			public void handle(ActionEvent arg0) {
 				try {
 					gc.clearRect(0, 0, ModeleBogo.getTAILLECANVAS(), ModeleBogo.getTAILLECANVAS());
@@ -126,6 +139,65 @@ public class InterfaceVue implements Observer {
 				}
 			}
 		});
+		
+		
+		/**
+		 * permet d'enregistrer le contenu du textArea(pas encore fonctionnel)
+		 * on est oblige de me mettre dans la vue car FileChooser --> javafx
+		 * but: recuper le contenu du textarea et le  met dans le repertoire scripts
+		 */
+		
+		/*
+		public void saveScript(TextArea textarea){
+		//utilisateur choisi le nom du fichier(pas encore fonctionnel)
+		
+		FileChooser filechoose = new FileChooser();
+		filechoose.setInitialDirectory(new File("."));
+		
+		try {
+			FileWriter lu = new FileWriter("file:scripts");
+			BufferedWriter out = new BufferedWriter(lu);
+			out.write(textarea.getText());
+			out.close();
+		}catch(IOException ioe) {
+			System.out.println(ioe.getMessage());
+		}
+		
+		}
+		//////////utilisation si save est pressé
+		save.setOnAction(e->saveScript(textCommande));
+		*/
+		
+		/**
+		 * meme principe que pour le saveScript()
+		 * on lit le fichier tant que le flux n'est pas fini, on stock tout dans une chaine de caractere
+		 * avec laquelle on mais a jour le textarea
+		 */
+		
+		/*
+		public void openScript(TextArea textarea) {
+			
+			FileChooser filechoose = new FileChooser();
+			
+			
+			try {
+				FileInputStream fis = new FileInputStream("file:scripts/nomduscript");
+				int nbelem;
+				while((nbelem = fis.available())>0) {
+					byte[]b = new byte[nbelem];
+					int res = fis.read(b);
+					if(res == -1)
+						break;///fin du flux
+						String s = new String(b);
+						textarea.setText(s);
+					}
+			}catch(Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		open.setOnAction(e->openScript(textCommande));
+		*/
 		
 		
 		

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Observable;
 
 
+
 public class ModeleBogo extends Observable {
 	
 	private static final int TAILLECANVAS = 300;
@@ -122,6 +123,9 @@ public class ModeleBogo extends Observable {
 		}
 		//actualiser();
 	}
+
+
+	
 	
 	
 	
