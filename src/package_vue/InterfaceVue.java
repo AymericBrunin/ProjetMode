@@ -144,33 +144,22 @@ public class InterfaceVue implements Observer {
 			}
 		});
 		
-		
 		/**
-		 * permet d'enregistrer le contenu du textArea(pas encore fonctionnel)
-		 * on est oblige de me mettre dans la vue car FileChooser --> javafx
-		 * but: recuper le contenu du textarea et le  met dans le repertoire scripts
+		 * ici premiere methode de sauvegarde ---> plus simple niveau prog
 		 */
-		
-		/*
-		public void saveScript(TextArea textarea){
-		//utilisateur choisi le nom du fichier(pas encore fonctionnel)
-		
-		FileChooser filechoose = new FileChooser();
-		filechoose.setInitialDirectory(new File("."));
-		
-		try {
-			FileWriter lu = new FileWriter("file:scripts");
-			BufferedWriter out = new BufferedWriter(lu);
-			out.write(textarea.getText());
-			out.close();
-		}catch(IOException ioe) {
-			System.out.println(ioe.getMessage());
-		}
-		
-		}
-		//////////utilisation si save est pressé
-		save.setOnAction(e->saveScript(textCommande));
-		*/
+		save.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent arg0) {
+				try {
+					FileWriter lu = new FileWriter("monscript.txt");
+					BufferedWriter out = new BufferedWriter(lu);
+					out.write(textCommande.getText());
+					out.close();
+				}catch(IOException ioe) {
+					System.out.println(ioe.getMessage()+"Probleme");
+				}
+			}
+			
+		});
 		
 		/**
 		 * meme principe que pour le saveScript()
@@ -204,15 +193,38 @@ public class InterfaceVue implements Observer {
 		*/
 		
 		
-		
 		fenetre.setSpacing(10);
 		fenetre.getChildren().addAll(canvas, groupeBoutonZoneDeSaisie);
 		stage.setScene(scene);
 		stage.setTitle("Bogo");
 		stage.show();
 		
-		
+		//2eme methode de sauvegarde
+		//save.setOnAction(e->saveScript(textCommande));
 	}
+	
+	
+/**
+ * Ici deuxieme methode de sauvegarde avec une fonction(saveScript) et une lambda expression dans le constructeur
+ */
+	//2eme methode de sauvegarde
+/*
+	public void saveScript(TextArea textarea){
+	//utilisateur choisi le nom du fichier(pas encore fonctionnel)
+	FileChooser filechoose = new FileChooser();
+	filechoose.setInitialDirectory(new File("."));
+	try {
+		FileWriter lu = new FileWriter("2emeMethode.txt");
+		BufferedWriter out = new BufferedWriter(lu);
+		out.write(textarea.getText());
+		out.close();
+	}catch(IOException ioe) {
+		System.out.println(ioe.getMessage());
+	}
+	}
+	*/
+	
+	
 	
 	@Override
 	public void update(Observable o, Object arg) {
