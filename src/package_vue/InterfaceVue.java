@@ -195,7 +195,7 @@ public class InterfaceVue implements Observer {
 						String s = new String(b);
 						textarea.setText(s);
 					}
-			}catch(Exception e) {
+		 	}catch(Exception e) {
 				System.out.println(e.getMessage());
 			}
 		}
