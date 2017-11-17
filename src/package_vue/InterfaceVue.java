@@ -2,9 +2,7 @@ package package_vue;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -25,6 +23,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import package_modele.ModeleBogo;
 
@@ -50,6 +49,7 @@ public class InterfaceVue implements Observer {
 	private Button quit = new Button();
 	///////Bouton enregistrer(paul)
 	private Button save = new Button();
+	private Button open = new Button();
 	//////////////////////////////////
 	private Canvas canvas = new Canvas();
 	private TextArea textCommande = new TextArea();
@@ -57,6 +57,7 @@ public class InterfaceVue implements Observer {
 	private Label valeurBoutonLabel = new Label();
 	private GraphicsContext gc = canvas.getGraphicsContext2D();
 	private ModeleBogo modele;
+	private boolean saved;
 	
 	public InterfaceVue(ModeleBogo mb){
 		modele = mb;
@@ -101,8 +102,11 @@ public class InterfaceVue implements Observer {
 		////////////Mise en forme du bouton sauvegarder(paul)
 		save.setText("Sauvegarder"); // temporaire
 		save.setTooltip(new Tooltip("Sauvegarder"));
+		
+		open.setText("Ouvrir");
+		open.setTooltip(new Tooltip("Charge un script"));
 				
-		menu.getChildren().addAll(save, clear, submit, quit);
+		menu.getChildren().addAll(open, save, clear, submit, quit);
 		menu.setAlignment(Pos.BOTTOM_RIGHT);
 		
 		valeurBoutonLabel.setText("Valeur :");
@@ -149,18 +153,30 @@ public class InterfaceVue implements Observer {
 		 */
 		save.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent arg0) {
-				try {
-					FileWriter lu = new FileWriter("monscript.txt");
-					BufferedWriter out = new BufferedWriter(lu);
-					out.write(textCommande.getText());
-					out.close();
-				}catch(IOException ioe) {
-					System.out.println(ioe.getMessage()+"Probleme");
-				}
+			
+					FileChooser fileChooser = new FileChooser();
+
+					//FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
+					//fileChooser.getExtensionFilters().add(extFilter);
+					File file = fileChooser.showSaveDialog(stage);
+					FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("txt files (*.txt)", "*.txt");
+					fileChooser.getExtensionFilters().add(extFilter);
+
+					if (file != null) {
+						try {
+							FileWriter lu = new FileWriter("text");
+							BufferedWriter out = new BufferedWriter(lu);
+							out.write(textCommande.getText());
+							out.close();
+							saved = true;
+						} catch (Exception ex) {
+							System.out.println("erreur");
+						}
+					}
 			}
 			
 		});
-		
+
 		/**
 		 * meme principe que pour le saveScript()
 		 * on lit le fichier tant que le flux n'est pas fini, on stock tout dans une chaine de caractere
