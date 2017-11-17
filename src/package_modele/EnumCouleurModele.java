@@ -21,7 +21,7 @@ public enum EnumCouleurModele {
 	 * @param String
 	 * @return boolean
 	 */
-	static boolean estCouleur(String s) {
+	public static boolean estCouleur(String s) {
 		s=s.toUpperCase();
 		for(int i=0; i<Couleur.values().length;i++) {
 			if(s.equals(Couleur.values()[i].toString())){

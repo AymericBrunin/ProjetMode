@@ -2,21 +2,27 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import package_Bogo.Commande;
-import package_Bogo.Point;
+import package_modele.PointModele;
+import package_modele.EnumCouleurModele;
 
 public class TestCommande {
-	Commande c=new Commande(null, new Point(0,0,0),null);
+	PointModele c=new PointModele(0, 0, 1);
+	
 	@Test
 	public void testCalculAngleDroite() {
-		assertEquals(4, c.calculAngleDroite(364,0));
-		assertEquals(90, c.calculAngleDroite(90,0));
+		assertEquals(5, c.calculAngleDroite(364));
+		assertEquals(91, c.calculAngleDroite(90));
 
 	}
 	@Test
 	public void testCalculAngleGauche() {
-		assertEquals(330, c.calculAngleGauche(30,0));
-		assertEquals(90, c.calculAngleDroite(90,0));
+		assertEquals(331, c.calculAngleGauche(30));
+		assertEquals(91, c.calculAngleDroite(90));
 		
+	}
+	@Test
+	public void testEstCouleur(){
+		assertTrue(EnumCouleurModele.estCouleur("rouge"));
+		assertFalse(EnumCouleurModele.estCouleur("rose bonbon"));
 	}
 }
