@@ -1,7 +1,9 @@
 package package_vue;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Observable;
 import java.util.Observer;
@@ -154,27 +156,20 @@ public class InterfaceVue implements Observer {
 		save.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent arg0) {
 			
-					FileChooser fileChooser = new FileChooser();
-
-					//FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
-					//fileChooser.getExtensionFilters().add(extFilter);
-					File file = fileChooser.showSaveDialog(stage);
-					FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("txt files (*.txt)", "*.txt");
-					fileChooser.getExtensionFilters().add(extFilter);
-
-					if (file != null) {
-						try {
-							FileWriter lu = new FileWriter("text");
-							BufferedWriter out = new BufferedWriter(lu);
-							out.write(textCommande.getText());
-							out.close();
-							saved = true;
+					FileChooser fileChoose = new FileChooser();
+					fileChoose.getExtensionFilters().add(new ExtensionFilter("Text Files (*.txt)", "*.txt"));
+					fileChoose.setInitialDirectory(new File("scripts"));
+					File f = fileChoose.showSaveDialog(stage);
+				
+					try {
+						FileWriter lu = new FileWriter(f);
+						BufferedWriter out = new BufferedWriter(lu);
+						out.write(textCommande.getText());
+						out.close();
 						} catch (Exception ex) {
 							System.out.println("erreur");
 						}
 					}
-			}
-			
 		});
 
 		/**
@@ -183,6 +178,29 @@ public class InterfaceVue implements Observer {
 		 * avec laquelle on mais a jour le textarea
 		 */
 		
+		open.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent arg1) {
+				FileChooser fileChoose = new FileChooser();
+				fileChoose.setInitialDirectory(new File("scripts"));
+				fileChoose.getExtensionFilters().add(new ExtensionFilter("Text Files (*.txt)", "*.txt"));
+			    File f = fileChoose.showOpenDialog(stage);
+			    try {
+			    	if(f != null) {
+			    			textCommande.setText(f.toString());
+			    			FileReader read = new FileReader(f);
+			    			BufferedReader in = new BufferedReader(read);
+			    			textCommande.setText(in.readLine());
+			    			//ajout d'un fileWriter    
+			    	}else {
+			    		System.out.println("the file is not valid");
+			    	}
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			
+			
+		});
 		/*
 		public void openScript(TextArea textarea) {
 			
