@@ -59,7 +59,6 @@ public class InterfaceVue implements Observer {
 	private Label valeurBoutonLabel = new Label();
 	private GraphicsContext gc = canvas.getGraphicsContext2D();
 	private ModeleBogo modele;
-	private boolean saved;
 	
 	public InterfaceVue(ModeleBogo mb){
 		modele = mb;
@@ -100,14 +99,15 @@ public class InterfaceVue implements Observer {
 		Image imgQuit = new Image("File:sources_du_projet/ressources/quit.png");
 		quit.setGraphic(new ImageView(imgQuit));
 		quit.setTooltip(new Tooltip("quitter"));
-		
-		////////////Mise en forme du bouton sauvegarder(paul)
-		save.setText("Sauvegarder"); // temporaire
+		/*
+		Image imgSave = new Image("File:sources_du_projet/ressources/save.png");
+		save.setGraphic(new ImageView(imgSave));
 		save.setTooltip(new Tooltip("Sauvegarder"));
 		
-		open.setText("Ouvrir");
+		Image imgOpen = new Image("File:sources_du_projet/ressources/open.png");
+		open.setGraphic(new ImageView(imgOpen));
 		open.setTooltip(new Tooltip("Charge un script"));
-				
+		 */	
 		menu.getChildren().addAll(open, save, clear, submit, quit);
 		menu.setAlignment(Pos.BOTTOM_RIGHT);
 		
@@ -151,7 +151,7 @@ public class InterfaceVue implements Observer {
 		});
 		
 		/**
-		 * ici premiere methode de sauvegarde ---> plus simple niveau prog
+		 * javadoc à faire
 		 */
 		save.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent arg0) {
@@ -173,12 +173,14 @@ public class InterfaceVue implements Observer {
 		});
 
 		/**
-		 * meme principe que pour le saveScript()
-		 * on lit le fichier tant que le flux n'est pas fini, on stock tout dans une chaine de caractere
-		 * avec laquelle on mais a jour le textarea
+		 * 
+		 * javadoc à faire
+		 * 
 		 */
 		
 		open.setOnAction(new EventHandler<ActionEvent>() {
+			private BufferedReader in;
+
 			public void handle(ActionEvent arg1) {
 				FileChooser fileChoose = new FileChooser();
 				fileChoose.setInitialDirectory(new File("scripts"));
@@ -188,9 +190,8 @@ public class InterfaceVue implements Observer {
 			    	if(f != null) {
 			    			textCommande.setText(f.toString());
 			    			FileReader read = new FileReader(f);
-			    			BufferedReader in = new BufferedReader(read);
-			    			textCommande.setText(in.readLine());
-			    			//ajout d'un fileWriter    
+			    			in = new BufferedReader(read);
+			    			textCommande.setText(in.readLine()); 
 			    	}else {
 			    		System.out.println("the file is not valid");
 			    	}
