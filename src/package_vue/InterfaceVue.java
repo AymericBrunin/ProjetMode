@@ -99,15 +99,15 @@ public class InterfaceVue implements Observer {
 		Image imgQuit = new Image("File:sources_du_projet/ressources/quit.png");
 		quit.setGraphic(new ImageView(imgQuit));
 		quit.setTooltip(new Tooltip("quitter"));
-		/*
-		Image imgSave = new Image("File:sources_du_projet/ressources/save.png");
+		
+		Image imgSave = new Image("File:sources_du_projet/ressources/save2.png");
 		save.setGraphic(new ImageView(imgSave));
 		save.setTooltip(new Tooltip("Sauvegarder"));
 		
-		Image imgOpen = new Image("File:sources_du_projet/ressources/open.png");
+		Image imgOpen = new Image("File:sources_du_projet/ressources/open2.png");
 		open.setGraphic(new ImageView(imgOpen));
-		open.setTooltip(new Tooltip("Charge un script"));
-		 */	
+		open.setTooltip(new Tooltip("Charger un script"));
+			
 		menu.getChildren().addAll(open, save, clear, submit, quit);
 		menu.setAlignment(Pos.BOTTOM_RIGHT);
 		
