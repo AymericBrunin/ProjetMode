@@ -51,8 +51,7 @@ public class TokenAnalyserModele {
 			else if(valCourante.equals("LEVER") || valCourante.equals("POSER"));
 			else if(valCourante.equals("COULEUR") && !EnumCouleurModele.estCouleur(it.next())) return false;
 			else if(valCourante.equals("ALLERA") && (!estUnEntier(it.next()) || !it.next().equals(",") || !estUnEntier(it.next()))) return false;
-			
-			if(valCourante.equals("FIN")) return true;
+			if(valCourante.equals("FIN") && !it.hasNext()) return true;
 		}
 		return false;
 		
