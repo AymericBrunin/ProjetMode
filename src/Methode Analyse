@@ -1,0 +1,37 @@
+public boolean verifScript(String text){
+	int nbScript =0;
+	int nbFin =0;
+	List<String> listeMot = new ArrayList<String>;
+	Reader r = new StringReader(text);
+	StreamTokenizer st = Stringreader(r);
+	while(st.nextToken != st.TT_EOF){
+		listMot.add(st.val);
+	}
+	Iterator<String> it = listeMot.iterator();
+	String valCourante:
+	if(listeMot.isEmpty()){return true;}
+	if(!it.next().equals("SCRIPT")){ return false;}
+	nbScript++;
+	while(it.hasNext()){
+		valCourante = it.next();
+		if(valCourante.equals("AVANT") && !estUnEntier(it.next())) {return false;}
+		else if(valCourante.equals("DROITE") && !estUnEntier(it.next())){ return false;}
+		else if(valCourante.equals("GAUCHE") && !estUnEntier(it.next())){ return false;}
+		else if(valCourante.equals("REPETER") &&( !estUnEntier(it.next()) || !it.next().equals("SCRIPT"))){ return false;}
+		else if(valCourante.equals("SCRIPT"){ nbScript++;}
+		else if(valCourante.equals("FIN"){nbFin++;}
+		else if(!valCourante.equals("FIN") && !it.hasNext()){return false;}
+	}
+	if(nbScript != nbFin){return false;}
+	return true;
+}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
