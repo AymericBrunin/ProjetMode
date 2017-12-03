@@ -1,7 +1,5 @@
 import static org.junit.Assert.*;
-
 import org.junit.Test;
-
 import package_modele.PointModele;
 import package_modele.EnumCouleurModele;
 
@@ -20,9 +18,11 @@ public class TestCommande {
 		assertEquals(91, c.calculAngleDroite(90));
 		
 	}
+	/*
 	@Test
 	public void testEstCouleur(){
 		assertTrue(EnumCouleurModele.estCouleur("rouge"));
 		assertFalse(EnumCouleurModele.estCouleur("rose bonbon"));
 	}
+	*/
 }

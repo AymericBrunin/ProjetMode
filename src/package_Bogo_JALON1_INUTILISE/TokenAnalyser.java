@@ -1,4 +1,4 @@
-package package_Bogo;
+package package_Bogo_JALON1_INUTILISE;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;

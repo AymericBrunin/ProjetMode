@@ -1,4 +1,4 @@
-package package_Bogo;
+package package_Bogo_JALON1_INUTILISE;
 
 public class LigneC {
 	public String action;

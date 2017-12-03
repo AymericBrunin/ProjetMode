@@ -2,6 +2,7 @@ package package_arbre;
 
 import package_vue.Visiteur;
 
+import java.util.List;
 public abstract class ArbreMot {
 	/**
 	 * Methode Ajout d'un Arbre Mot
